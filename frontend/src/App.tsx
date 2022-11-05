@@ -7,8 +7,8 @@ import Bills from './widgets/Bills';
 function App() {
   return (
     <div className="center">
-      <Balance accounts={null}/>
-      <Bills />
+      <Balance banks={null}/>
+      <Bills billsTimeline={null}/>
     </div>
   );
 }
