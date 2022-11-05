@@ -15,7 +15,7 @@ interface Props {
 function Balance({ accounts }: Props) {
     return(
         <div>
-            <CardLayout>
+            <CardLayout width="1000">
                 <div className="heading">
                     <h2 className="card__title">Balances</h2>
                 </div>
