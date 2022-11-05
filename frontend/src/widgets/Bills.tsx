@@ -1,5 +1,4 @@
 import { useState } from "react";
-import '../styles/Bills.css';
 import CardLayout from "../components/CardLayout"
 
 interface Bill {
@@ -42,6 +41,7 @@ function Bills({ billsTimeline }: Props) {
     ]
 
     return (
+<<<<<<< Updated upstream
         <CardLayout width={500}>
             <div className="heading">
                 <h2>Bills</h2>
@@ -51,14 +51,62 @@ function Bills({ billsTimeline }: Props) {
                     <h3>{scheduledBills.dueDate.month} {scheduledBills.dueDate.day}, {scheduledBills.dueDate.year}</h3>
                     {scheduledBills.bills !== null && scheduledBills.bills.map(bill => (
                         <div>
-                            <a>{bill.description}</a> 
+                            <a>{bill.description}</a>
                             <a>${bill.paid}</a>
-                            
+
                         </div>
                     ))}
                 </div>
             ))}
         </CardLayout>
+=======
+        <CardLayout width="25vw">
+            <div className="heading">
+                <h2>Upcoming Bills</h2>
+                <div className="content">
+                    <div className="row">
+                        <div>
+                            11/05
+                        </div>
+                        <div className="col">
+                            <div>
+                                Rent
+                            </div>
+                            <div>
+                                $1000.00
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div>
+                            11/05
+                        </div>
+                        <div className="col">
+                            <div>
+                                Electricity
+                            </div>
+                            <div>
+                                $100.00
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div>
+                            11/06
+                        </div>
+                        <div className="col">
+                            <div>
+                                Water
+                            </div>
+                            <div>
+                                $20.00
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </CardLayout >
+>>>>>>> Stashed changes
     )
 }
 

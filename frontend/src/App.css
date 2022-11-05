@@ -1,10 +1,7 @@
-body {
-  background-color: rgb(27, 19, 82);
-  color: white
+html {
+  min-height: 100%;
 }
 
-.center {
-  text-align: center;
-  justify-content: center;
-  align-items: center;
+body {
+  background: radial-gradient(#77EED8, #9EABE4);
 }

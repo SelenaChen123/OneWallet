@@ -9,25 +9,16 @@ body {
         Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
-.main-container {
-    padding: 30px;
-}
-
-.heading {
-    text-align: left;
-}
-
 .card {
-    margin: 20px;
+    background-color: white;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
     padding: 20px;
-    width: 500px;
-    min-height: 200px;
-    display: grid;
-    grid-template-rows: 20px 50px 1fr 50px;
     border-radius: 10px;
+    min-width: 300px;
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
     transition: all 0.2s;
-    background: radial-gradient(#60efbc, #58d5c9);
 }
 
 .card:hover {
@@ -35,8 +26,25 @@ body {
     transform: scale(1.01);
 }
 
-.card__title {
-    grid-row: 3/4;
-    font-weight: 400;
-    color: white;
+.heading {
+    text-align: left;
+    font-weight: 600;
+    color: #60efbc;
+}
+
+.content {
+    color: black;
+    font-size: 120%;
+}
+
+.row {
+    margin-top: 5%;
+    display: flex;
+}
+
+.col {
+    margin-left: 5%;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
 }
