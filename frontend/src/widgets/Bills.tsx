@@ -41,8 +41,7 @@ function Bills({ billsTimeline }: Props) {
     ]
 
     return (
-<<<<<<< Updated upstream
-        <CardLayout width={500}>
+        <CardLayout width="25vw">
             <div className="heading">
                 <h2>Bills</h2>
             </div>
@@ -59,54 +58,6 @@ function Bills({ billsTimeline }: Props) {
                 </div>
             ))}
         </CardLayout>
-=======
-        <CardLayout width="25vw">
-            <div className="heading">
-                <h2>Upcoming Bills</h2>
-                <div className="content">
-                    <div className="row">
-                        <div>
-                            11/05
-                        </div>
-                        <div className="col">
-                            <div>
-                                Rent
-                            </div>
-                            <div>
-                                $1000.00
-                            </div>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div>
-                            11/05
-                        </div>
-                        <div className="col">
-                            <div>
-                                Electricity
-                            </div>
-                            <div>
-                                $100.00
-                            </div>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div>
-                            11/06
-                        </div>
-                        <div className="col">
-                            <div>
-                                Water
-                            </div>
-                            <div>
-                                $20.00
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </CardLayout >
->>>>>>> Stashed changes
     )
 }
 
