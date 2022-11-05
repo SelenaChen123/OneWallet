@@ -1,17 +1,25 @@
 import React, { useState } from 'react';
-import '../styles/Balance.css';
+import CardLayout from '../components/CardLayout';
+import '../styles/CardLayout.css';
 
-interface Props {
-    balance: number
+interface Account {
+    bankName: string
+    accountType: string
+    balanceAmount: number
 }
 
-function Balance({ balance }: Props) {
-    const [bal, setBal] = useState(0)
+interface Props {
+    accounts: Account[] | null
+}
 
+function Balance({ accounts }: Props) {
     return(
-        <div className="card">
-            <a>Balance: {balance}</a>
-            <button onClick={() => setBal(bal + 1)}>{bal}</button>
+        <div>
+            <CardLayout>
+                <div className="heading">
+                    <h2 className="card__title">Balances</h2>
+                </div>
+            </CardLayout>
         </div>
     )
 }
