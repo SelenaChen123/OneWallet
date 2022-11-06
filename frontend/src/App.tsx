@@ -64,6 +64,40 @@ function App() {
       }
   ]
 
+  const dailyTransactions = [
+      {
+          date: new Date("2022-11-05T17:00:00"),
+          transactions: [
+              {
+                  accountNumber: "asdffdsa",
+                  bankName: "Bank of America",
+                  description: "Deposit",
+                  isWithdrawal: false,
+                  amount: 1000.00
+              },
+              {
+                  accountNumber: "123476134",
+                  bankName: "PNC",
+                  description: "Withdrawal",
+                  isWithdrawal: true,
+                  amount: 200.00
+              }
+          ]
+      },
+      {
+          date: new Date("2022-11-06T17:00:00"),
+          transactions: [
+              {
+                  accountNumber: "asdf7890",
+                  bankName: "Wells Fargo",
+                  description: "Withdrawal",
+                  isWithdrawal: true,
+                  amount: 100.00
+              }
+          ]
+      }
+  ]
+
   // useEffect(() => {
   //   const getUserMetadata = async () => {
   //     // console.log({ isAuthenticated, isLoading, })
@@ -110,6 +144,7 @@ function App() {
         <Transactions dailyTransactions={data.transactionData} /> */}
         <Balance accountData={accountData} />
         <Bills billsTimeline={billsTimeline} />
+        <Transactions dailyTransactions={dailyTransactions} />
       </div>
     </>
   );
