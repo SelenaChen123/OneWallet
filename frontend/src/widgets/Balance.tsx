@@ -37,14 +37,17 @@ function Balance({ banks }: Props) {
             <CardLayout width="25vw">
                 <div className="heading">
                     <h2>Balances</h2>
+                    <div className="padding">
+                        <hr />
+                    </div>
                 </div>
                 <div className="content">
                     {banks !== null && banks.map(bank => (
                         <div>
                             <div className="subheading">
-                                <h3>{bank.bankName}</h3>
+                                <p>{bank.bankName}</p>
                             </div>
-                            <div style={{marginTop: "5%"}}>
+                            <div style={{ marginTop: "5%" }}>
                                 {bank.accounts !== null && bank.accounts.map(account => (
                                     <div className="col">
                                         <p>{account.accountType}</p>

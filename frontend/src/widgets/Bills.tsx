@@ -39,6 +39,9 @@ function Bills({ billsTimeline }: Props) {
         <CardLayout width="25vw">
             <div className="heading">
                 <h2>Bills</h2>
+                <div className="padding">
+                    <hr />
+                </div>
             </div>
             <div className="content">
                 {billsTimeline !== null && billsTimeline.map(scheduledBills => (

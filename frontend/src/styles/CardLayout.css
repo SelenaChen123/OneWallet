@@ -29,7 +29,14 @@ body {
 .heading {
     text-align: left;
     font-weight: 600;
-    color: #60efbc;
+    color: #4eca9f;
+    /* text-decoration: underline; */
+}
+
+.padding {
+    padding-top: 5%;
+    padding-bottom: 5%;
+    color: #4eca9f;
 }
 
 .content {
@@ -37,6 +44,7 @@ body {
 }
 
 .subheading {
+    font-weight: 600;
     margin-top: 5%;
     text-align: left;
     color: #8193e3;
@@ -48,12 +56,26 @@ body {
     min-width: 70px;
 }
 
+.subsubsubheading {
+    color: gray;
+    font-style: italic;
+}
+
+.red {
+    color: #ab3a3a;
+}
+
+.green {
+    color: #3aab40;
+}
+
 .row {
     margin-top: 5%;
     display: flex;
 }
 
 .col {
+    margin-bottom: 5%;
     margin-left: 5%;
     display: flex;
     justify-content: space-between;

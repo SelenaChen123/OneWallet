@@ -3,24 +3,49 @@ import CardLayout from "../components/CardLayout"
 
 interface Transaction {
     bankName: string
-    date: Date
     description: string
     withdrawal: number
-    amount: number
+    amount: string
 }
 
-interface Props {
+interface DailyTransactions {
+    date: Date
     transactions: Transaction[] | null
 }
 
-function Transactions({ transactions }: Props) {
-    transactions = [
+interface Props {
+    dailyTransactions: DailyTransactions[] | null
+}
+
+function Transactions({ dailyTransactions }: Props) {
+    dailyTransactions = [
         {
-            bankName: "Bank of America",
-            date: new Date(),
-            description: "Account got hacked.",
-            withdrawal: 0,
-            amount: 400.00
+            date: new Date("2022-11-05T17:00:00"),
+            transactions: [
+                {
+                    bankName: "Bank of America",
+                    description: "Deposit",
+                    withdrawal: 0,
+                    amount: "1000.00"
+                },
+                {
+                    bankName: "PNC",
+                    description: "Withdrawal",
+                    withdrawal: 1,
+                    amount: "200.00"
+                }
+            ]
+        },
+        {
+            date: new Date("2022-11-06T17:00:00"),
+            transactions: [
+                {
+                    bankName: "Wells Fargo",
+                    description: "Withdrawal",
+                    withdrawal: 1,
+                    amount: "100.00"
+                }
+            ]
         }
     ]
 
@@ -28,15 +53,36 @@ function Transactions({ transactions }: Props) {
         <CardLayout width="25vw">
             <div className="heading">
                 <h2>Transactions</h2>
-            </div>
-            {transactions !== null && transactions.map(transaction => (
-                <div>
-                    <a>{transaction.date.getMonth()}</a>/<a>{transaction.date.getDay()}</a>
-                    <a>{transaction.bankName}</a>
-                    <a>{transaction.description}</a>
-                    {transaction.withdrawal === 1 ? <a>+</a> : <a>-</a>} <a>{transaction.amount}</a>
+                <div className="padding">
+                    <hr />
                 </div>
-            ))}
+            </div>
+            <div className="content">
+                {dailyTransactions !== null && dailyTransactions.map(dailyTransaction => (
+                    <div className="row">
+                        <div className="subsubheading">
+                            <p>{dailyTransaction.date.toLocaleDateString()}</p>
+                        </div>
+                        <div style={{ flexGrow: '99' }}>
+                            {dailyTransaction.transactions !== null && dailyTransaction.transactions.map(transaction => (
+                                <div className="col">
+                                    <div>
+                                        <div>
+                                            <p>{transaction.description}</p>
+                                        </div>
+                                        <div className="subsubsubheading">
+                                            <p>{transaction.bankName}</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        {transaction.withdrawal === 0 ? <div className="green"><p>+ ${transaction.amount}</p></div> : <div className="red"><p>- ${transaction.amount}</p></div>}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                ))}
+            </div>
         </CardLayout>
     )
 }
