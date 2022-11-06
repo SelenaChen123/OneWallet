@@ -1,6 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { useEffect, useState } from 'react';
-import Header from './Header';
 import { AuthButton } from './AuthButton';
 import './styles/App.css';
 import { AppData, BillData, CreditScoreData, RawAppData, RawBillData, RawCreditScoreData, RawTransactionData, TransactionData } from './types';
@@ -65,13 +64,86 @@ function App() {
     return <div>Loading...</div>
   }
 
+  // const accountData = [
+  //   {
+  //     bankName: "Bank of America",
+  //     accounts: [
+  //       { accountNumber: "12341234", accountType: "Checking Account", balance: 200.00 },
+  //       { accountNumber: "12341243", accountType: "Savings Account", balance: 100.00 },
+  //     ]
+  //   },
+  //   {
+  //     bankName: "Wells Fargo",
+  //     accounts: [
+  //       { accountNumber: "fdasasdf", accountType: "Checking Account", balance: 500.00 },
+  //     ]
+  //   },
+  // ]
+
+  // const billsTimeline = [
+  //   {
+  //     dueDate: new Date("2022-12-01T17:00:00"),
+  //     bills: [
+  //       { description: "Rent", amountDue: 200.00, isPaid: false }
+  //     ]
+  //   },
+  //   {
+  //     dueDate: new Date("2023-01-01T17:00:00"),
+  //     bills: [
+  //       { description: "Groceries", amountDue: 80.00, isPaid: true },
+  //       { description: "Netflix Subscription", amountDue: 10.00, isPaid: false },
+  //       { description: "Dinner", amountDue: 20.00, isPaid: true },
+  //     ]
+  //   }
+  // ]
+
+  // const dailyTransactions = [
+  //   {
+  //     date: new Date("2022-11-05T17:00:00"),
+  //     transactions: [
+  //       {
+  //         accountNumber: "asdffdsa",
+  //         bankName: "Bank of America",
+  //         description: "Deposit",
+  //         isWithdrawal: false,
+  //         amount: 1000.00
+  //       },
+  //       {
+  //         accountNumber: "123476134",
+  //         bankName: "PNC",
+  //         description: "Withdrawal",
+  //         isWithdrawal: true,
+  //         amount: 200.00
+  //       }
+  //     ]
+  //   },
+  //   {
+  //     date: new Date("2022-11-06T17:00:00"),
+  //     transactions: [
+  //       {
+  //         accountNumber: "asdf7890",
+  //         bankName: "Wells Fargo",
+  //         description: "Withdrawal",
+  //         isWithdrawal: true,
+  //         amount: 100.00
+  //       }
+  //     ]
+  //   }
+  // ]
+
   return (
     <>
-      <Header isAuthenticated={isAuthenticated} />
-      <div className="center">
+      <div className="bar">
+        <SideBar />
+      </div>
+      <div className="main">
         <Balance accountData={data.accountData} />
         <Bills billsTimeline={data.billData} />
         <Transactions dailyTransactions={data.transactionData} />
+
+        {/* <div><Balance accountData={accountData} /></div>
+        <div><Bills billsTimeline={billsTimeline} /></div>
+        <div><Transactions dailyTransactions={dailyTransactions} /></div> */}
       </div>
     </>
   );

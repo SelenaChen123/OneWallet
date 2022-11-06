@@ -1,8 +1,6 @@
-import './styles/SideBar.css';
-
 function SideBar() {
     return (
-        <div className="bar">
+        <div>
             <p>OneWallet</p>
         </div>
     )
