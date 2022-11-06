@@ -9,7 +9,7 @@ interface Props {
 
 function CreditScores({ creditScores }: Props) {
     return (
-        <CardLayout width="25vw">
+        <CardLayout width="40vw">
             <div className="heading">
                 {/* <IconContext.Provider value={{ className: "icon" }}><MdOutlineReceiptLong /></IconContext.Provider> */}
                 <h2>Credit Scores</h2>
@@ -31,7 +31,7 @@ function CreditScores({ creditScores }: Props) {
                         </div>
                         <div>
                             <CreditScoreMarker creditScore={creditScore.creditScore} >
-                                <img className="bar" src={require('../public/CreditScoreBar.png')} />
+                                <img className="markerbar" src={require('../public/CreditScoreBar.png')} />
                             </CreditScoreMarker>
                         </div>
                     </div>
