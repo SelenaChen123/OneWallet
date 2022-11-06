@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS bank_accounts (
     account_number TEXT,
     user_id INTEGER,
     bank_name TEXT,
+    account_type TEXT,
     balance INTEGER,
 
     PRIMARY KEY (account_number, bank_name),
@@ -60,10 +61,10 @@ con.executemany('INSERT INTO users (user_id, name) VALUES (?, ?)', [
 ])
 
 con.executemany("INSERT INTO bank_accounts (account_number, user_id, bank_name, balance) VALUES (?, ?, ?, ?)", [
-    ('12345', 1, 'Bank of Murica', 100000),
-    ('12346', 1, 'Chased', 12300),
-    ('12347', 2, 'Bank of Murica', 100000),
-    ('12348', 3, '"Definitely Not Money Laundering" Bank (tm)', 10000000),
+    ('12345', 1, 'Bank of Murica', "Savings Account", 100000),
+    ('12346', 1, 'Chased', "Checking Account", 12300),
+    ('12347', 2, 'Bank of Murica', "Savings Account", 100000),
+    ('12348', 3, '"Definitely Not Money Laundering" Bank (tm)', "Checking Account", 10000000),
 ])
 
 con.executemany('INSERT INTO bills (user_id, amount_due, due_date, description, paid) VALUES (?, ?, ?, ?, FALSE)', [
