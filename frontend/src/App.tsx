@@ -93,127 +93,140 @@ function App() {
     return <AuthButton isLogin={true} />
   }
 
-  // const accountData = [
-  //   {
-  //     bankName: "Bank of America",
-  //     accounts: [
-  //       { accountNumber: "12341234", accountType: "Checking Account", balance: 20000 },
-  //       { accountNumber: "12341243", accountType: "Savings Account", balance: 10000 },
-  //     ]
-  //   },
-  //   {
-  //     bankName: "Wells Fargo",
-  //     accounts: [
-  //       { accountNumber: "fdasasdf", accountType: "Checking Account", balance: 50000 },
-  //     ]
-  //   },
-  // ]
+  const accountData = [
+    {
+      bankName: "Bank of America",
+      accounts: [
+        { accountNumber: "12341234", accountType: "Checking Account", balance: 20000 },
+        { accountNumber: "12341243", accountType: "Savings Account", balance: 10000 },
+      ]
+    },
+    {
+      bankName: "Wells Fargo",
+      accounts: [
+        { accountNumber: "fdasasdf", accountType: "Checking Account", balance: 50000 },
+      ]
+    },
+  ]
 
-  // const dailyTransactions = [
-  //   {
-  //     date: new Date("2022-11-05T17:00:00"),
-  //     transactions: [
-  //       {
-  //         accountNumber: "asdffdsa",
-  //         bankName: "Bank of America",
-  //         description: "Deposit",
-  //         isWithdrawal: false,
-  //         amount: 100000
-  //       },
-  //       {
-  //         accountNumber: "123476134",
-  //         bankName: "PNC",
-  //         description: "Withdrawal",
-  //         isWithdrawal: true,
-  //         amount: 20000
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     date: new Date("2022-11-06T17:00:00"),
-  //     transactions: [
-  //       {
-  //         accountNumber: "asdf7890",
-  //         bankName: "Wells Fargo",
-  //         description: "Withdrawal",
-  //         isWithdrawal: true,
-  //         amount: 10000
-  //       }
-  //     ]
-  //   }
-  // ]
+  const transactionData = [
+    {
+      date: new Date("2022-11-05T17:00:00"),
+      transactions: [
+        {
+          accountNumber: "asdffdsa",
+          bankName: "Bank of America",
+          description: "Deposit",
+          isWithdrawal: false,
+          amount: 100000
+        },
+        {
+          accountNumber: "123476134",
+          bankName: "PNC",
+          description: "Withdrawal",
+          isWithdrawal: true,
+          amount: 20000
+        }
+      ]
+    },
+    {
+      date: new Date("2022-11-06T17:00:00"),
+      transactions: [
+        {
+          accountNumber: "asdf7890",
+          bankName: "Wells Fargo",
+          description: "Withdrawal",
+          isWithdrawal: true,
+          amount: 10000
+        }
+      ]
+    }
+  ]
 
-  // const billsTimeline = [
-  //   {
-  //     dueDate: new Date("2022-12-01T17:00:00"),
-  //     bills: [
-  //       { description: "Rent", amountDue: 20000, isPaid: false }
-  //     ]
-  //   },
-  //   {
-  //     dueDate: new Date("2023-01-01T17:00:00"),
-  //     bills: [
-  //       { description: "Groceries", amountDue: 8000, isPaid: true },
-  //       { description: "Netflix Subscription", amountDue: 1000, isPaid: false },
-  //       { description: "Dinner", amountDue: 2000, isPaid: true },
-  //     ]
-  //   }
-  // ]
+  const billData = [
+    {
+      dueDate: new Date("2022-12-01T17:00:00"),
+      bills: [
+        { description: "Rent", amountDue: 20000, isPaid: false }
+      ]
+    },
+    {
+      dueDate: new Date("2023-01-01T17:00:00"),
+      bills: [
+        { description: "Groceries", amountDue: 8000, isPaid: true },
+        { description: "Netflix Subscription", amountDue: 1000, isPaid: false },
+        { description: "Dinner", amountDue: 2000, isPaid: true },
+      ]
+    }
+  ]
 
-  // const creditScores = [
-  //   {
-  //     reportDate: new Date("2022-11-05T17:00:00"),
-  //     creditScore: 850,
-  //     reportingAgency: "FICO"
-  //   },
-  //   {
-  //     reportDate: new Date("2022-12-06T17:00:00"),
-  //     creditScore: 350,
-  //     reportingAgency: "VantageScore"
-  //   },
-  // ]
+  const creditScoreData = [
+    {
+      reportDate: new Date("2022-11-05T17:00:00"),
+      creditScore: 850,
+      reportingAgency: "FICO"
+    },
+    {
+      reportDate: new Date("2022-12-06T17:00:00"),
+      creditScore: 350,
+      reportingAgency: "VantageScore"
+    },
+  ]
 
-  // const financialAdvisors = [
-  //   {
-  //     bankName: "Wells Fargo",
-  //     advisor: {
-  //       name: "Selena Chen",
-  //       phone: "(539)-874-2196",
-  //       email: "selena.chen@email.com"
-  //     }
-  //   },
-  //   {
-  //     bankName: "PNC",
-  //     advisor: {
-  //       name: "Alex Snezhko",
-  //       phone: "(987)-236-4244",
-  //       email: "alex.snezhko@email.com"
-  //     }
-  //   },
-  //   {
-  //     bankName: "Bank of America",
-  //     advisor: {
-  //       name: "Tyrone Wu",
-  //       phone: "(139)-286-5817",
-  //       email: "tyrone.wu@email.com"
-  //     }
-  //   }
-  // ]
+  const financialAdvisorData = [
+    {
+      bankName: "Wells Fargo",
+      advisor: {
+        name: "Selena Chen",
+        phone: "(539)-874-2196",
+        email: "selena.chen@email.com"
+      }
+    },
+    {
+      bankName: "PNC",
+      advisor: {
+        name: "Alex Snezhko",
+        phone: "(987)-236-4244",
+        email: "alex.snezhko@email.com"
+      }
+    },
+    {
+      bankName: "Bank of America",
+      advisor: {
+        name: "Tyrone Wu",
+        phone: "(139)-286-5817",
+        email: "tyrone.wu@email.com"
+      }
+    }
+  ]
 
   return (
     <>
       <SideBar setDarkMode={setDarkMode} darkMode={darkMode} isAuthenticated={isAuthenticated} activeSections={activeSections} setActiveSections={setActiveSections} editMode={editMode} setEditMode={setEditMode} />
+      {/* <SideBar setDarkMode={setDarkMode} darkMode={darkMode} isAuthenticated={true} activeSections={activeSections} setActiveSections={setActiveSections} editMode={editMode} setEditMode={setEditMode} /> */}
       <div className="main">
         {activeSections["Balances"] &&
-          <Balance darkMode={darkMode} accountData={data.accountData} editMode={editMode} closeSection={() => setActiveSections({...activeSections, "Balances": false })} />}
+          <Balance darkMode={darkMode} accountData={data.accountData} editMode={editMode} closeSection={() => setActiveSections({ ...activeSections, "Balances": false })} />}
         {activeSections["Transactions"] &&
-          <Transactions darkMode={darkMode} dailyTransactions={data.transactionData} editMode={editMode} closeSection={() => setActiveSections({...activeSections, "Transactions": false})} />}
+          <Transactions darkMode={darkMode} dailyTransactions={data.transactionData} editMode={editMode} closeSection={() => setActiveSections({ ...activeSections, "Transactions": false })} />}
         {activeSections["Bills"] &&
-          <Bills darkMode={darkMode} billsTimeline={data.billData} editMode={editMode} closeSection={() => setActiveSections({...activeSections, "Bills": false})} />}
+          <Bills darkMode={darkMode} billsTimeline={data.billData} editMode={editMode} closeSection={() => setActiveSections({ ...activeSections, "Bills": false })} />}
         {activeSections["Credit Scores"] &&
-          <CreditScores darkMode={darkMode} creditScores={data.creditScoreData} editMode={editMode} closeSection={() => setActiveSections({...activeSections, "Credit Scores": false })} />}
+          <CreditScores darkMode={darkMode} creditScores={data.creditScoreData} editMode={editMode} closeSection={() => setActiveSections({ ...activeSections, "Credit Scores": false })} />}
         {activeSections["Financial Advisors"] &&
-          <FinancialAdvisors darkMode={darkMode} financialAdvisors={data.financialAdvisorData} editMode={editMode} closeSection={() => setActiveSections({...activeSections, "Financial Advisors": false })} />}
+          <FinancialAdvisors darkMode={darkMode} financialAdvisors={data.financialAdvisorData} editMode={editMode} closeSection={() => setActiveSections({ ...activeSections, "Financial Advisors": false })} />}
+
+        {/* {activeSections["Balances"] &&
+          <Balance darkMode={darkMode} accountData={accountData} editMode={editMode} closeSection={() => setActiveSections({ ...activeSections, "Balances": false })} />}
+        {activeSections["Transactions"] &&
+          <Transactions darkMode={darkMode} dailyTransactions={transactionData} editMode={editMode} closeSection={() => setActiveSections({ ...activeSections, "Transactions": false })} />}
+        {activeSections["Bills"] &&
+          <Bills darkMode={darkMode} billsTimeline={billData} editMode={editMode} closeSection={() => setActiveSections({ ...activeSections, "Bills": false })} />}
+        {activeSections["Credit Scores"] &&
+          <CreditScores darkMode={darkMode} creditScores={creditScoreData} editMode={editMode} closeSection={() => setActiveSections({ ...activeSections, "Credit Scores": false })} />}
+        {activeSections["Financial Advisors"] &&
+          <FinancialAdvisors darkMode={darkMode} financialAdvisors={financialAdvisorData} editMode={editMode} closeSection={() => setActiveSections({ ...activeSections, "Financial Advisors": false })} />} */}
+
       </div>
     </>
   );
