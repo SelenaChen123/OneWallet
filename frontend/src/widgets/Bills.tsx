@@ -1,39 +1,30 @@
 import { useState } from "react";
 import CardLayout from "../components/CardLayout"
-
-interface Bill {
-    description: string
-    paid: string
-}
-
-interface ScheduledBills {
-    dueDate: Date
-    bills: Bill[] | null
-}
+import { BillData } from "../types";
 
 interface Props {
-    billsTimeline: ScheduledBills[] | null
+    billsTimeline: BillData[];
 }
 
 function Bills({ billsTimeline }: Props) {
     const [data, setData] = useState(billsTimeline)
 
-    billsTimeline = [
-        {
-            dueDate: new Date("2022-11-05T17:00:00"),
-            bills: [
-                { description: "Rent", paid: "200.00" }
-            ]
-        },
-        {
-            dueDate: new Date("2023-01-01T17:00:00"),
-            bills: [
-                { description: "Groceries", paid: "80.00" },
-                { description: "Netflix Subscription", paid: "10.00" },
-                { description: "Dinner", paid: "20.00" },
-            ]
-        }
-    ]
+    // billsTimeline = [
+    //     {
+    //         dueDate: new Date("2022-11-05T17:00:00"),
+    //         bills: [
+    //             { description: "Rent", paid: "200.00" }
+    //         ]
+    //     },
+    //     {
+    //         dueDate: new Date("2023-01-01T17:00:00"),
+    //         bills: [
+    //             { description: "Groceries", paid: "80.00" },
+    //             { description: "Netflix Subscription", paid: "10.00" },
+    //             { description: "Dinner", paid: "20.00" },
+    //         ]
+    //     }
+    // ]
 
     return (
         <CardLayout width="25vw">
@@ -56,7 +47,7 @@ function Bills({ billsTimeline }: Props) {
                                         <p>{bill.description}</p>
                                     </div>
                                     <div>
-                                        <p>${bill.paid}</p>
+                                        <p>${bill.isPaid}</p>
                                     </div>
                                 </div>
                             ))}

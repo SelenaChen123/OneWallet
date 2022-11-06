@@ -1,36 +1,27 @@
 import '../styles/CardLayout.css';
 import CardLayout from '../components/CardLayout';
-
-interface Account {
-    accountType: string
-    balanceAmount: string
-}
-
-interface Bank {
-    bankName: string
-    accounts: Account[] | null
-}
+import { AccountData } from '../types';
 
 interface Props {
-    banks: Bank[] | null
+    accountData: AccountData[];
 }
 
-function Balance({ banks }: Props) {
-    banks = [
-        {
-            bankName: "Bank of America",
-            accounts: [
-                { accountType: "Checking Account", balanceAmount: "200.00" },
-                { accountType: "Savings Account", balanceAmount: "100.00" },
-            ]
-        },
-        {
-            bankName: "Wells Fargo",
-            accounts: [
-                { accountType: "Checking Account", balanceAmount: "500.00" },
-            ]
-        },
-    ]
+function Balance({ accountData }: Props) {
+    // banks = [
+    //     {
+    //         bankName: "Bank of America",
+    //         accounts: [
+    //             { accountType: "Checking Account", balanceAmount: "200.00" },
+    //             { accountType: "Savings Account", balanceAmount: "100.00" },
+    //         ]
+    //     },
+    //     {
+    //         bankName: "Wells Fargo",
+    //         accounts: [
+    //             { accountType: "Checking Account", balanceAmount: "500.00" },
+    //         ]
+    //     },
+    // ]
 
     return (
         <div>
@@ -42,7 +33,7 @@ function Balance({ banks }: Props) {
                     </div>
                 </div>
                 <div className="content">
-                    {banks !== null && banks.map(bank => (
+                    {accountData.map(bank => (
                         <div>
                             <div className="subheading">
                                 <p>{bank.bankName}</p>
@@ -51,7 +42,7 @@ function Balance({ banks }: Props) {
                                 {bank.accounts !== null && bank.accounts.map(account => (
                                     <div className="col">
                                         <p>{account.accountType}</p>
-                                        <p>${account.balanceAmount}</p>
+                                        <p>${account.balance}</p>
                                     </div>
                                 ))}
                             </div>
