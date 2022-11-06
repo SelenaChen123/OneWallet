@@ -5,3 +5,21 @@ html {
 body {
   background: radial-gradient(#77EED8, #9EABE4);
 }
+
+.bar {
+  height: 100%;
+  width: 20%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: white;
+  overflow-x: hidden;
+  padding-top: 60px;
+  transition: 0.5s;
+}
+
+.main {
+  transition: margin-left .5s;
+  padding-left: 20vw;
+}

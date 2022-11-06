@@ -4,6 +4,7 @@ import Header from './Header';
 import { AuthButton } from './AuthButton';
 import './styles/App.css';
 import { AppData, BillData, CreditScoreData, RawAppData, RawBillData, RawCreditScoreData, RawTransactionData, TransactionData } from './types';
+import SideBar from './SideBar';
 import Balance from './widgets/Balance';
 import Bills from './widgets/Bills';
 import Transactions from './widgets/Transactions';
