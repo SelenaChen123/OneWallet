@@ -47,6 +47,23 @@ function App() {
       },
   ]
 
+  const billsTimeline = [
+      {
+          dueDate: new Date("2022-12-01T17:00:00"),
+          bills: [
+              { description: "Rent", amountDue: 200.00, isPaid: false }
+          ]
+      },
+      {
+          dueDate: new Date("2023-01-01T17:00:00"),
+          bills: [
+              { description: "Groceries", amountDue: 80.00, isPaid: true },
+              { description: "Netflix Subscription", amountDue: 10.00, isPaid: false },
+              { description: "Dinner", amountDue: 20.00, isPaid: true },
+          ]
+      }
+  ]
+
   // useEffect(() => {
   //   const getUserMetadata = async () => {
   //     // console.log({ isAuthenticated, isLoading, })
@@ -92,6 +109,7 @@ function App() {
         <Bills billsTimeline={data.billData} />
         <Transactions dailyTransactions={data.transactionData} /> */}
         <Balance accountData={accountData} />
+        <Bills billsTimeline={billsTimeline} />
       </div>
     </>
   );

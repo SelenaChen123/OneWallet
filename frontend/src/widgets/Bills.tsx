@@ -8,23 +8,6 @@ interface Props {
 }
 
 function Bills({ billsTimeline }: Props) {
-    // billsTimeline = [
-    //     {
-    //         dueDate: new Date("2022-12-01T17:00:00"),
-    //         bills: [
-    //             { description: "Rent", paid: "200.00" }
-    //         ]
-    //     },
-    //     {
-    //         dueDate: new Date("2023-01-01T17:00:00"),
-    //         bills: [
-    //             { description: "Groceries", paid: "80.00" },
-    //             { description: "Netflix Subscription", paid: "10.00" },
-    //             { description: "Dinner", paid: "20.00" },
-    //         ]
-    //     }
-    // ]
-
     return (
         <CardLayout width="25vw">
             <div className="heading">
@@ -47,7 +30,7 @@ function Bills({ billsTimeline }: Props) {
                                         <p>{bill.description}</p>
                                     </div>
                                     <div>
-                                        <p>${bill.isPaid}</p>
+                                        <p>${bill.amountDue}</p>
                                     </div>
                                 </div>
                             ))}
