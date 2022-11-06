@@ -10,6 +10,8 @@ import Transactions from './widgets/Transactions';
 import CreditScores from './widgets/CreditScores';
 import FinancialAdvisors from './widgets/FinancialAdvisors';
 import ScheduledPayments from './widgets/ScheduledPayments';
+import { GiWallet } from "react-icons/gi"
+import CardLayout from './components/CardLayout';
 
 export function preprocessData(data: RawAppData): AppData {
   function processBill(billsData: RawBillData[]): BillData[] {
@@ -87,9 +89,16 @@ function App() {
 
   if (!isAuthenticated) {
     return (
-      <div style={{ margin: "auto", marginTop: "3em", textAlign: "center" }}>
-        <div style={{ fontSize: "1.5em", marginBottom: "1em" }}>Welcome to OneWallet! Please log in to access the site:</div>
-        <AuthButton isLogin={true} />
+      <div style={{ marginTop: "13em" }}>
+        <CardLayout width={"40vw"} darkMode={darkMode}>
+          <div style={{ margin: "auto", textAlign: "center" }}>
+            <div style={{ fontSize: "20em" }}>
+              <GiWallet />
+            </div>
+            <div style={{ fontSize: "1.5em", marginBottom: "2em" }}>Welcome to OneWallet! Please log in to access the site:</div>
+            <AuthButton isLogin={true} />
+          </div>
+        </CardLayout>
       </div>
     );
   }
