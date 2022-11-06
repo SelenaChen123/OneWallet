@@ -1,6 +1,8 @@
 .close-widget {
   font-size: 2em;
   transition: 0.25s;
+  cursor: pointer;
+  margin-left: 0.5em;
 }
 
 .close-widget:hover {

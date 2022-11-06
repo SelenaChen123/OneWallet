@@ -181,10 +181,10 @@ def get_info():
         if existing is None:
             scheduled_payments_data.append({ 'dueDate': dd, 'bills': [payment] })
         else:
-            existing['payments'].append(payment)
+            existing['bills'].append(payment)
 
     cur.close()
-    return jsonify({ 'name': name, 'accountData': account_data, 'billData': bill_data, 'transactionData': transaction_data, 'creditScoreData': credit_score_data, 'financialAdvisorData': financial_advisors_data })
+    return jsonify({ 'name': name, 'accountData': account_data, 'billData': bill_data, 'transactionData': transaction_data, 'creditScoreData': credit_score_data, 'financialAdvisorData': financial_advisors_data, 'scheduledPaymentData': scheduled_payments_data })
 
 @app.route('/api/add-bill', methods=['POST'])
 @cross_origin(headers=["Content-Type", "Authorization"])

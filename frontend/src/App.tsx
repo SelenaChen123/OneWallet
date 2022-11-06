@@ -21,8 +21,8 @@ export function preprocessData(data: RawAppData): AppData {
   function processCreditScore(creditScoresData: RawCreditScoreData[]): CreditScoreData[] {
     return creditScoresData.map(creditScoreData => ({ ...creditScoreData, reportDate: new Date(creditScoreData.reportDate) }));
   }
-  function processPayment(scheduledPaymentData: RawScheduledPaymentData[]): ScheduledPaymentData[] {
-    return scheduledPaymentData.map(scheduledPaymentData => ({ ...scheduledPaymentData, dueDate: new Date(scheduledPaymentData.dueDate) }));
+  function processPayment(scheduledPaymentsData: RawScheduledPaymentData[]): ScheduledPaymentData[] {
+    return scheduledPaymentsData.map(scheduledPaymentData => ({ ...scheduledPaymentData, dueDate: new Date(scheduledPaymentData.dueDate) }));
   }
 
   const billData = processBill(data.billData);
@@ -77,14 +77,6 @@ function App() {
     }
   }, [getAccessTokenSilently, isLoading, isAuthenticated])
 
-  if (!isAuthenticated) {
-    return <AuthButton isLogin={true} />
-  }
-
-  if (isLoading || data === null) {
-    return <div>Loading...</div>
-  }
-
   useEffect(() => {
     if (darkMode) {
       document.body.style.background = "radial-gradient(#2A5470, #4C4177)"
@@ -92,6 +84,23 @@ function App() {
       document.body.style.background = "radial-gradient(#77EED8, #9EABE4)"
     }
   }, [darkMode])
+
+  if (!isAuthenticated) {
+    return (
+      <div style={{ margin: "auto", marginTop: "3em", textAlign: "center" }}>
+        <div style={{ fontSize: "1.5em", marginBottom: "1em" }}>Welcome to OneWallet! Please log in to access the site:</div>
+        <AuthButton isLogin={true} />
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+
+  if (data === null) {
+    return <div>Loading...</div>
+  }
 
   const accountData = [
     {

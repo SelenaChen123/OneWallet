@@ -99,16 +99,15 @@ con.executemany('INSERT INTO bills (user_id, amount_due, due_date, description, 
 
 con.executemany('INSERT INTO transactions (account_number, bank_name, amount, date, description, withdrawal) VALUES (?, ?, ?, ?, ?, ?)', [
     ('12345', 'Bank of Murica', 12300, '2000-01-01 12:30:00.000', 'Money Laundering', 1),
-    ('12345', 'Bank of Murica', 120000, '2000-01-02 12:30:00.000', 'Money Laundering', 1),
-    ('12345', 'Bank of Murica', 10000, '2000-01-03 12:30:00.000', 'Money Laundering', 1),
-    ('12345', 'Bank of Murica', 10000, '2000-01-04 12:30:00.000', 'Money Laundering', 1),
-    ('12345', 'Bank of Murica', 10000, '2000-01-05 12:30:00.000', 'Money Laundering', 1),
+    ('12345', 'Bank of Murica', 120000, '2000-01-02 12:30:00.000', 'Netflix Subscription', 0),
+    ('12345', 'Bank of Murica', 10000, '2000-01-04 12:30:00.000', 'Money Unlaundering', 0),
+    ('12345', 'Bank of Murica', 10000, '2000-01-05 12:30:00.000', "Roommate's Rent", 1),
 ])
 
-con.executemany('INSERT INTO credit_scores (user_id, report_date, credit_score) VALUES (?, ?, ?)', [
-    ('1', '2000-01-01 12:30:00.000', 400),
-    ('1', '2001-01-01 12:30:00.000', 600),
-    ('1', '2002-01-01 12:30:00.000', 800),
+con.executemany('INSERT INTO credit_scores (user_id, report_date, reporting_agency, credit_score) VALUES (?, ?, ?, ?)', [
+    ('1', '2000-01-01 12:30:00.000', 'Equifax', 400),
+    ('1', '2001-01-01 12:30:00.000', 'Experian', 600),
+    ('1', '2002-01-01 12:30:00.000', 'TransUnion', 800),
 ])
 
 con.executemany('INSERT INTO financial_advisors (user_id, bank_name, name, phone, email) VALUES (?, ?, ?, ?, ?)', [

@@ -14,7 +14,7 @@ interface Props {
 
 function Balance({ accountData, darkMode, editMode, closeSection }: Props) {
     return (
-        <div>
+        <div id="balances">
             <CardLayout width="40vw" darkMode={darkMode}>
                 <div className="heading">
                     <IconContext.Provider value={{ className: "icon" }}><MdOutlineAccountBalanceWallet /></IconContext.Provider>

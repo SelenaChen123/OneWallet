@@ -14,43 +14,45 @@ interface Props {
 
 function Transactions({ dailyTransactions, darkMode, editMode, closeSection }: Props) {
     return (
-        <CardLayout width="40vw" darkMode={darkMode}>
-            <div className="heading">
-                <IconContext.Provider value={{ className: "icon" }}><HiOutlineArrowsRightLeft /></IconContext.Provider>
-                <h2>Transactions</h2>
+        <div id="transactions">
+            <CardLayout width="40vw" darkMode={darkMode}>
+                <div className="heading">
+                    <IconContext.Provider value={{ className: "icon" }}><HiOutlineArrowsRightLeft /></IconContext.Provider>
+                    <h2>Transactions</h2>
 
-                {editMode && <CloseWidget closeSection={closeSection} />}
-            </div>
-            <div className="padding">
-                <hr />
-            </div>
-            <div className="content">
-                {dailyTransactions !== null && dailyTransactions.map(dailyTransaction => (
-                    <div className="row">
-                        <div className="subsubheading">
-                            <p>{dailyTransaction.date.toLocaleDateString()}</p>
-                        </div>
-                        <div style={{ flexGrow: '99' }}>
-                            {dailyTransaction.transactions.map(transaction => (
-                                <div className="col">
-                                    <div>
+                    {editMode && <CloseWidget closeSection={closeSection} />}
+                </div>
+                <div className="padding">
+                    <hr />
+                </div>
+                <div className="content">
+                    {dailyTransactions !== null && dailyTransactions.map(dailyTransaction => (
+                        <div className="row">
+                            <div className="subsubheading">
+                                <p>{dailyTransaction.date.toLocaleDateString()}</p>
+                            </div>
+                            <div style={{ flexGrow: '99' }}>
+                                {dailyTransaction.transactions.map(transaction => (
+                                    <div className="col">
                                         <div>
-                                            <p>{transaction.description}</p>
+                                            <div>
+                                                <p>{transaction.description}</p>
+                                            </div>
+                                            <div className="subsubsubheading">
+                                                <p>{transaction.bankName}</p>
+                                            </div>
                                         </div>
-                                        <div className="subsubsubheading">
-                                            <p>{transaction.bankName}</p>
+                                        <div>
+                                            {transaction.isWithdrawal ? <div className="green"><p>+{showMoney(transaction.amount)}</p></div> : <div className="red"><p>-{showMoney(transaction.amount)}</p></div>}
                                         </div>
                                     </div>
-                                    <div>
-                                        {transaction.isWithdrawal ? <div className="green"><p>+{showMoney(transaction.amount)}</p></div> : <div className="red"><p>-{showMoney(transaction.amount)}</p></div>}
-                                    </div>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                ))}
-            </div>
-        </CardLayout>
+                    ))}
+                </div>
+            </CardLayout>
+        </div>
     )
 }
 

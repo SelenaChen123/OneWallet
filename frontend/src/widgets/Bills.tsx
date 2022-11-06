@@ -105,63 +105,65 @@ function Bills({ billsTimeline, darkMode, editMode, closeSection }: Props) {
     }
 
     return (
-        <CardLayout width="40vw" darkMode={darkMode}>
-            <div className="heading">
-                <IconContext.Provider value={{ className: "icon" }}><MdOutlineReceiptLong /></IconContext.Provider>
-                <h2>Bills</h2>
+        <div id="bills">
+            <CardLayout width="40vw" darkMode={darkMode}>
+                <div className="heading">
+                    <IconContext.Provider value={{ className: "icon" }}><MdOutlineReceiptLong /></IconContext.Provider>
+                    <h2>Bills</h2>
 
-                {editMode && <CloseWidget closeSection={closeSection} />}
-            </div>
-            <div className="padding">
-                <hr />
-            </div>
-            <div className="content">
-                {data.map(scheduledBills => (
-                    <div className="row">
-                        <div className="subsubheading">
-                            <p>{scheduledBills.dueDate.toLocaleDateString()}</p>
-                        </div>
-                        <div style={{ flexGrow: '99' }}>
-                            {scheduledBills.bills.map(bill => (
-                                <div className="col" style={{ color: bill.isPaid ? "gray" : "inherit" }}>
-                                    <div>
-                                        <input type={'checkbox'} checked={bill.isPaid} onChange={() => checkBill(bill.description)} />
-                                        <span style={{ textDecoration: bill.isPaid ? "line-through" : "none", marginLeft: "1em" }}>{bill.description}</span>
+                    {editMode && <CloseWidget closeSection={closeSection} />}
+                </div>
+                <div className="padding">
+                    <hr />
+                </div>
+                <div className="content">
+                    {data.map(scheduledBills => (
+                        <div className="row">
+                            <div className="subsubheading">
+                                <p>{scheduledBills.dueDate.toLocaleDateString()}</p>
+                            </div>
+                            <div style={{ flexGrow: '99' }}>
+                                {scheduledBills.bills.map(bill => (
+                                    <div className="col" style={{ color: bill.isPaid ? "gray" : "inherit" }}>
+                                        <div>
+                                            <input type={'checkbox'} checked={bill.isPaid} onChange={() => checkBill(bill.description)} />
+                                            <span style={{ textDecoration: bill.isPaid ? "line-through" : "none", marginLeft: "1em" }}>{bill.description}</span>
+                                        </div>
+                                        <div>
+                                            <span style={{ textDecoration: bill.isPaid ? "line-through" : "none", marginRight: "2em" }}>{showMoney(bill.amountDue)}</span>
+                                            <span className="remove-bill" onClick={() => removeBill(bill.description)}>
+                                                ✖
+                                            </span>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <span style={{ textDecoration: bill.isPaid ? "line-through" : "none", marginRight: "2em" }}>{showMoney(bill.amountDue)}</span>
-                                        <span className="remove-bill" onClick={() => removeBill(bill.description)}>
-                                            ✖
-                                        </span>
-                                    </div>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                ))}
-            </div>
-            {
-                addDroppeddown ? (
-                    <div className="create-new-bill">
-                        <div className="create-bill-field">
-                            <label>Description</label>
-                            <input type={"text"} value={description} onChange={e => setDescription(e.target.value)} />
+                    ))}
+                </div>
+                {
+                    addDroppeddown ? (
+                        <div className="create-new-bill">
+                            <div className="create-bill-field">
+                                <label>Description</label>
+                                <input type={"text"} value={description} onChange={e => setDescription(e.target.value)} />
+                            </div>
+                            <div className="create-bill-field">
+                                <label>Amount</label>
+                                <input type={'number'} value={amount} onChange={e => setAmount(parseFloat(e.target.value))} />
+                            </div>
+                            <div className="create-bill-field">
+                                <label>Due Date</label>
+                                <input type={'text'} value={dueDate} onChange={e => setDueDate(e.target.value)} />
+                            </div>
+                            <button className="confirm-add-bill" onClick={() => addBill(description, amount, dueDate)}>Create</button>
+                            <button className="cancel-add-bill" onClick={() => setAddDroppeddown(false)}>Cancel</button>
                         </div>
-                        <div className="create-bill-field">
-                            <label>Amount</label>
-                            <input type={'number'} value={amount} onChange={e => setAmount(parseFloat(e.target.value))} />
-                        </div>
-                        <div className="create-bill-field">
-                            <label>Due Date</label>
-                            <input type={'text'} value={dueDate} onChange={e => setDueDate(e.target.value)} />
-                        </div>
-                        <button className="confirm-add-bill" onClick={() => addBill(description, amount, dueDate)}>Create</button>
-                        <button className="cancel-add-bill" onClick={() => setAddDroppeddown(false)}>Cancel</button>
-                    </div>
-                ) :
-                    <button className="confirm-add-bill" onClick={() => setAddDroppeddown(true)}>Add new bill</button>
-            }
-        </CardLayout >
+                    ) :
+                        <button className="confirm-add-bill" onClick={() => setAddDroppeddown(true)}>Add new bill</button>
+                }
+            </CardLayout >
+        </div>
     )
 }
 

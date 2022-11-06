@@ -15,7 +15,7 @@ interface Props {
 function FinancialAdvisors({ financialAdvisors, darkMode, editMode, closeSection }: Props) {
 
     return (
-        <div>
+        <div id="financial-advisors">
             <CardLayout width="40vw" darkMode={darkMode}>
                 <div className="heading">
                     <IconContext.Provider value={{ className: "icon" }}><IoPersonOutline /></IconContext.Provider>
