@@ -14,7 +14,7 @@ body {
     margin: auto;
     margin-top: 20px;
     margin-bottom: 20px;
-    padding: 20px;
+    padding: 40px;
     border-radius: 10px;
     min-width: 300px;
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
@@ -39,17 +39,13 @@ body {
 .subheading {
     margin-top: 5%;
     text-align: left;
-    font-weight: 400;
-    color: #9EABE4;
+    color: #8193e3;
 }
 
 .subsubheading {
-    margin-top: 5%;
-    margin-left: 5%;
-    width: 90%;
-    text-align: left;
-    display: flex;
-    justify-content: space-between;
+    font-weight: 600;
+    color: #8193e3;
+    min-width: 70px;
 }
 
 .row {
@@ -59,7 +55,6 @@ body {
 
 .col {
     margin-left: 5%;
-    width: 90%;
     display: flex;
     justify-content: space-between;
 }

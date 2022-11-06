@@ -44,12 +44,14 @@ function Balance({ banks }: Props) {
                             <div className="subheading">
                                 <h3>{bank.bankName}</h3>
                             </div>
-                            {bank.accounts !== null && bank.accounts.map(account => (
-                                <div className="subsubheading">
-                                    <a>{account.accountType}</a>
-                                    <a>${account.balanceAmount}</a>
-                                </div>
-                            ))}
+                            <div style={{marginTop: "5%"}}>
+                                {bank.accounts !== null && bank.accounts.map(account => (
+                                    <div className="col">
+                                        <p>{account.accountType}</p>
+                                        <p>${account.balanceAmount}</p>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     ))}
                 </div>
