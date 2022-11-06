@@ -1,9 +1,9 @@
-import CardLayout from '../components/CardLayout';
 import '../styles/CardLayout.css';
+import CardLayout from '../components/CardLayout';
 
 interface Account {
     accountType: string
-    balanceAmount: number
+    balanceAmount: string
 }
 
 interface Bank {
@@ -20,14 +20,14 @@ function Balance({ banks }: Props) {
         {
             bankName: "Bank of America",
             accounts: [
-                { accountType: "Checking Account", balanceAmount: 200.00 },
-                { accountType: "Savings Account", balanceAmount: 100.00 },
+                { accountType: "Checking Account", balanceAmount: "200.00" },
+                { accountType: "Savings Account", balanceAmount: "100.00" },
             ]
         },
         {
             bankName: "Wells Fargo",
             accounts: [
-                { accountType: "Checking Account", balanceAmount: 500.00 },
+                { accountType: "Checking Account", balanceAmount: "500.00" },
             ]
         },
     ]
@@ -38,18 +38,22 @@ function Balance({ banks }: Props) {
                 <div className="heading">
                     <h2>Balances</h2>
                 </div>
-                {banks !== null && banks.map(bank => (
-                    <div>
-                        <h3>{bank.bankName}</h3>
-                        {bank.accounts !== null && bank.accounts.map(account => (
-                            <div>
-                                <a>{account.accountType}</a>
-                                <a>${account.balanceAmount}</a>
+                <div className="content">
+                    {banks !== null && banks.map(bank => (
+                        <div>
+                            <div className="subheading">
+                                <h3>{bank.bankName}</h3>
                             </div>
-                        ))}
-                    </div>
-                ))}
-            </CardLayout>
+                            {bank.accounts !== null && bank.accounts.map(account => (
+                                <div className="subsubheading">
+                                    <a>{account.accountType}</a>
+                                    <a>${account.balanceAmount}</a>
+                                </div>
+                            ))}
+                        </div>
+                    ))}
+                </div>
+            </CardLayout >
         </div>
     )
 }

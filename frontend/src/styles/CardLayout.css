@@ -34,7 +34,22 @@ body {
 
 .content {
     color: black;
-    font-size: 120%;
+}
+
+.subheading {
+    margin-top: 5%;
+    text-align: left;
+    font-weight: 400;
+    color: #9EABE4;
+}
+
+.subsubheading {
+    margin-top: 5%;
+    margin-left: 5%;
+    width: 90%;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
 }
 
 .row {

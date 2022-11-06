@@ -1,5 +1,4 @@
-import './App.css';
-import React from 'react';
+import './styles/App.css';
 import Balance from './widgets/Balance';
 import Bills from './widgets/Bills';
 
