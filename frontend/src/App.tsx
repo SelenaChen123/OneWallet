@@ -7,6 +7,8 @@ import { AppData, BillData, CreditScoreData, RawAppData, RawBillData, RawCreditS
 import Balance from './widgets/Balance';
 import Bills from './widgets/Bills';
 import Transactions from './widgets/Transactions';
+import CreditScores from './widgets/CreditScores';
+import FinancialAdvisors from './widgets/FinancialAdvisors';
 
 function preprocessData(data: RawAppData): AppData {
   function processBill(billsData: RawBillData[]): BillData[] {
@@ -26,53 +28,70 @@ function preprocessData(data: RawAppData): AppData {
 }
 
 function App() {
-  const { isAuthenticated, isLoading, getAccessTokenSilently, loginWithRedirect } = useAuth0();
+  // const { isAuthenticated, isLoading, getAccessTokenSilently, loginWithRedirect } = useAuth0();
   const [data, setData] = useState<AppData | null>(null)
 
-  useEffect(() => {
-    const getUserMetadata = async () => {
-      console.log({ isAuthenticated, isLoading, })
-      try {
-        console.log('1')
-        const accessToken = await getAccessTokenSilently({
-          audience: `https://hacknc2022ast-api`,
-          scope: "read:bankinfo",
-        });
-        console.log('2')
+  const accountData = [
+      {
+          bankName: "Bank of America",
+          accounts: [
+              { accountNumber: "12341234", accountType: "Checking Account", balance: 200.00 },
+              { accountNumber: "12341243", accountType: "Savings Account", balance: 100.00 },
+          ]
+      },
+      {
+          bankName: "Wells Fargo",
+          accounts: [
+              { accountNumber: "fdasasdf", accountType: "Checking Account", balance: 500.00 },
+          ]
+      },
+  ]
 
-        const response = await fetch(`http://localhost:5000/api/info`, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
+  // useEffect(() => {
+  //   const getUserMetadata = async () => {
+  //     // console.log({ isAuthenticated, isLoading, })
+  //     try {
+  //       // console.log('1')
+  //       // const accessToken = await getAccessTokenSilently({
+  //       //   audience: `https://hacknc2022ast-api`,
+  //       //   scope: "read:bankinfo",
+  //       // });
+  //       console.log('2')
 
-        const data = await response.json();
-        console.log(data);
-        setData(preprocessData(data));
-      } catch (e) {
-        console.log((e as any).message);
-      }
-    };
-    if (isAuthenticated) {
-      getUserMetadata();
-    }
-  }, [getAccessTokenSilently, isLoading, isAuthenticated])
+  //       const response = await fetch(`http://localhost:5000/api/info`, {
+  //         // headers: {
+  //         //   Authorization: `Bearer ${accessToken}`,
+  //         // },
+  //       });
 
-  if (!isAuthenticated) {
-    return <LoginButton />
-  }
+  //       const data = await response.json();
+  //       console.log(data);
+  //       setData(preprocessData(data));
+  //     } catch (e) {
+  //       console.log((e as any).message);
+  //     }
+  //   };
+  //   // if (isAuthenticated) {
+  //   //   getUserMetadata();
+  //   // }
+  // }, [getAccessTokenSilently, isLoading, isAuthenticated])
 
-  if (isLoading || data === null) {
-    return <div>Loading...</div>
-  }
+  // if (!isAuthenticated) {
+  //   return <LoginButton />
+  // }
+
+  // if (isLoading || data === null) {
+  //   return <div>Loading...</div>
+  // }
 
   return (
     <>
-      <Header isAuthenticated={isAuthenticated} />
+      {/* <Header isAuthenticated={isAuthenticated} /> */}
       <div className="center">
-        <Balance accountData={data.accountData} />
+        {/* <Balance accountData={data.accountData} />
         <Bills billsTimeline={data.billData} />
-        <Transactions dailyTransactions={data.transactionData} />
+        <Transactions dailyTransactions={data.transactionData} /> */}
+        <Balance accountData={accountData} />
       </div>
     </>
   );

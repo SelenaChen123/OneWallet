@@ -9,21 +9,7 @@ interface Props {
 }
 
 function Balance({ accountData }: Props) {
-    // banks = [
-    //     {
-    //         bankName: "Bank of America",
-    //         accounts: [
-    //             { accountType: "Checking Account", balanceAmount: "200.00" },
-    //             { accountType: "Savings Account", balanceAmount: "100.00" },
-    //         ]
-    //     },
-    //     {
-    //         bankName: "Wells Fargo",
-    //         accounts: [
-    //             { accountType: "Checking Account", balanceAmount: "500.00" },
-    //         ]
-    //     },
-    // ]
+    
 
     return (
         <div>
