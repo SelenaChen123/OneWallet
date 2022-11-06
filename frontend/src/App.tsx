@@ -25,9 +25,14 @@ export function preprocessData(data: RawAppData): AppData {
   return { ...data, billData, transactionData, creditScoreData };
 }
 
+export const allSections = ["Balances", "Transactions", "Bills", "Scheduled Payments", "Credit Scores", "Financial Advisors"];
+
 function App() {
   const { isAuthenticated, isLoading, getAccessTokenSilently, loginWithRedirect } = useAuth0();
   const [data, setData] = useState<AppData | null>(null)
+  const [darkMode, setDarkMode] = useState(false);
+  const [activeSections, setActiveSections] = useState(allSections);
+  const [editMode, setEditMode] = useState(false)
 
   useEffect(() => {
     const getUserMetadata = async () => {
@@ -55,6 +60,14 @@ function App() {
       getUserMetadata();
     }
   }, [getAccessTokenSilently, isLoading, isAuthenticated])
+
+  useEffect(() => {
+    if (darkMode) {
+      document.body.style.background = "radial-gradient(#2A5470, #4C4177)"
+    } else {
+      document.body.style.background = "radial-gradient(#77EED8, #9EABE4)"
+    }
+  }, [darkMode])
 
   if (!isAuthenticated) {
     return <AuthButton isLogin={true} />
@@ -146,17 +159,14 @@ function App() {
 
   return (
     <>
-      <div className="bar">
-        <SideBar />
-      </div>
+      <SideBar setDarkMode={setDarkMode} darkMode={darkMode} isAuthenticated={isAuthenticated} activeSections={activeSections} setActiveSections={setActiveSections} editMode={editMode} setEditMode={setEditMode} />
       <div className="main">
-        <Balance accountData={data.accountData} />
-        <Bills billsTimeline={data.billData} />
-        <Transactions dailyTransactions={data.transactionData} />
-
-        {/* <div><Balance accountData={accountData} /></div>
-        <div><Bills billsTimeline={billsTimeline} /></div>
-        <div><Transactions dailyTransactions={dailyTransactions} /></div> */}
+        {activeSections.includes("Balances") &&
+          <Balance darkMode={darkMode} accountData={data.accountData} editMode={editMode} closeSection={() => setActiveSections(activeSections.filter(x => x !== "Balances"))} />}
+        {activeSections.includes("Transactions") &&
+          <Transactions darkMode={darkMode} dailyTransactions={data.transactionData} editMode={editMode} closeSection={() => setActiveSections(activeSections.filter(x => x !== "Transactions"))} />}
+        {activeSections.includes("Bills") &&
+          <Bills darkMode={darkMode} billsTimeline={data.billData} editMode={editMode} closeSection={() => setActiveSections(activeSections.filter(x => x !== "Bills"))} />}
       </div>
     </>
   );

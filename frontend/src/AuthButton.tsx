@@ -13,8 +13,8 @@ export function AuthButton({ isLogin }: Props) {
   }
 
   return (
-    <button className="auth-button" onClick={() => logout({ returnTo: window.location.origin })}>
+    <div className="auth-button" onClick={() => logout({ returnTo: window.location.origin })}>
       Log Out
-    </button>
+    </div>
   );
 };

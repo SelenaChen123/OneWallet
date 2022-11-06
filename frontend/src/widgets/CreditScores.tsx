@@ -5,11 +5,12 @@ import '../styles/CreditScore.css';
 
 interface Props {
     creditScores: CreditScoreData[];
+    darkMode: boolean;
 }
 
-function CreditScores({ creditScores }: Props) {
+function CreditScores({ creditScores, darkMode }: Props) {
     return (
-        <CardLayout width="40vw">
+        <CardLayout width="40vw" darkMode={darkMode}>
             <div className="heading">
                 {/* <IconContext.Provider value={{ className: "icon" }}><MdOutlineReceiptLong /></IconContext.Provider> */}
                 <h2>Credit Scores</h2>

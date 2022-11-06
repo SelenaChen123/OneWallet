@@ -1,0 +1,101 @@
+.bar {
+  /* opacity: 0.8; */
+  height: 100%;
+  width: 15%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  padding-top: 60px;
+  transition: 0.5s;
+  text-align: center;
+}
+
+.bar-transparent {
+  opacity: 0.2;
+  height: 100%;
+  width: 15%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
+}
+
+.bar h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+.bar[data-dark=true] {
+  color: rgb(226, 226, 226);
+}
+
+.bar[data-dark=false] {
+  color: black;
+}
+
+.bar-transparent[data-dark=false] {
+  /* background-color: #8290cf; */
+  background-color: white;
+}
+
+.bar-transparent[data-dark=true] {
+  background-color: #403374;
+}
+
+.sidebar-section-icon {
+  display: inline-block;
+  font-size: 3em;
+  line-height: 0.75em;
+  padding: 0.25em;
+  border: none;
+  border-radius: 0.5em;
+}
+
+.enabled-section-icon {
+  /* border: 5px solid #b5dcdf; */
+  border: 5px solid rgb(228, 235, 241);
+}
+
+.disabled-section-icon {
+  border: 3px dashed gray;
+}
+
+.darkmode-switch-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2em;
+}
+
+.darkmode-switch {
+  width: 4em;
+  margin: 0 0.5em;
+  height: 2em;
+  border: 0.25em solid;
+  border-radius: 2em;
+  display: flex;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.darkmode-switch-circle {
+  margin-top: 0.05em;
+  margin-left: 0.15em;
+  margin-right: 0.15em;
+  font-size: 1em;
+}
+
+.edit-switch {
+  display: inline-block;
+  font-size: 1.5em;
+  margin-top: 1em;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  padding: 0.5em 1em;
+  border-radius: 0.5em;
+}

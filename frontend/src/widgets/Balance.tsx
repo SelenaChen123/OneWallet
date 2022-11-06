@@ -3,20 +3,26 @@ import CardLayout from '../components/CardLayout';
 import { AccountData } from '../types';
 import { IconContext } from "react-icons";
 import { MdOutlineAccountBalanceWallet } from "react-icons/md";
+import CloseWidget from '../components/CloseWidget';
 
 interface Props {
     accountData: AccountData[];
+    darkMode: boolean;
+    editMode: boolean;
+    closeSection: () => void;
 }
 
-function Balance({ accountData }: Props) {
+function Balance({ accountData, darkMode, editMode, closeSection }: Props) {
     
 
     return (
         <div>
-            <CardLayout width="40vw">
+            <CardLayout width="40vw" darkMode={darkMode}>
                 <div className="heading">
                     <IconContext.Provider value={{ className: "icon" }}><MdOutlineAccountBalanceWallet /></IconContext.Provider>
                     <h2>Balances</h2>
+
+                    {editMode && <CloseWidget closeSection={closeSection} />}
                 </div>
                 <div className="padding">
                     <hr />

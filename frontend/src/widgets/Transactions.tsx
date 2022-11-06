@@ -2,17 +2,23 @@ import CardLayout from "../components/CardLayout"
 import { TransactionData } from "../types";
 import { IconContext } from "react-icons";
 import { HiOutlineArrowsRightLeft } from "react-icons/hi2";
+import CloseWidget from "../components/CloseWidget";
 
 interface Props {
     dailyTransactions: TransactionData[];
+    darkMode: boolean;
+    editMode: boolean;
+    closeSection: () => void;
 }
 
-function Transactions({ dailyTransactions }: Props) {
+function Transactions({ dailyTransactions, darkMode, editMode, closeSection }: Props) {
     return (
-        <CardLayout width="40vw">
+        <CardLayout width="40vw" darkMode={darkMode}>
             <div className="heading">
                 <IconContext.Provider value={{ className: "icon" }}><HiOutlineArrowsRightLeft /></IconContext.Provider>
                 <h2>Transactions</h2>
+
+                {editMode && <CloseWidget closeSection={closeSection} />}
             </div>
             <div className="padding">
                 <hr />

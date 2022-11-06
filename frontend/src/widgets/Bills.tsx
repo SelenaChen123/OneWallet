@@ -6,12 +6,16 @@ import { BillData } from "../types";
 import { IconContext } from "react-icons";
 import { MdOutlineReceiptLong } from "react-icons/md";
 import "../styles/Bills.css"
+import CloseWidget from "../components/CloseWidget";
 
 interface Props {
     billsTimeline: BillData[];
+    darkMode: boolean;
+    editMode: boolean;
+    closeSection: () => void;
 }
 
-function Bills({ billsTimeline }: Props) {
+function Bills({ billsTimeline, darkMode, editMode, closeSection }: Props) {
     const [data, setData] = useState(billsTimeline);
     const { getAccessTokenSilently } = useAuth0();
 
@@ -117,10 +121,12 @@ function Bills({ billsTimeline }: Props) {
     }
 
     return (
-        <CardLayout width="40vw">
+        <CardLayout width="40vw" darkMode={darkMode}>
             <div className="heading">
                 <IconContext.Provider value={{ className: "icon" }}><MdOutlineReceiptLong /></IconContext.Provider>
                 <h2>Bills</h2>
+
+                {editMode && <CloseWidget closeSection={closeSection} />}
             </div>
             <div className="padding">
                 <hr />

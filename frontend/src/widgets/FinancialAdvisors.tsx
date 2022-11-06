@@ -8,7 +8,7 @@ function FinancialAdvisors({ }: Props) {
 
     return (
         <div>
-            <CardLayout width="25vw">
+            <CardLayout width="25vw" darkMode={true}>
                 <div className="heading">
                     <h2>Financial Advisors</h2>
                 </div>

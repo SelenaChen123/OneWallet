@@ -1,0 +1,8 @@
+.close-widget {
+  font-size: 2em;
+  transition: 0.25s;
+}
+
+.close-widget:hover {
+  color: rgb(216, 51, 51);
+}
