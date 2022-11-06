@@ -2,18 +2,23 @@ import CardLayout from "../components/CardLayout";
 import CreditScoreMarker from "../components/CreditScoreMarker";
 import { CreditScoreData } from "../types";
 import '../styles/CreditScore.css';
+import CloseWidget from "../components/CloseWidget";
 
 interface Props {
     creditScores: CreditScoreData[];
     darkMode: boolean;
+    editMode: boolean;
+    closeSection: () => void;
 }
 
-function CreditScores({ creditScores, darkMode }: Props) {
+function CreditScores({ creditScores, darkMode, editMode, closeSection }: Props) {
     return (
         <CardLayout width="40vw" darkMode={darkMode}>
             <div className="heading">
                 {/* <IconContext.Provider value={{ className: "icon" }}><MdOutlineReceiptLong /></IconContext.Provider> */}
                 <h2>Credit Scores</h2>
+
+                {editMode && <CloseWidget closeSection={closeSection} />}
             </div>
             <div className="padding">
                 <hr />

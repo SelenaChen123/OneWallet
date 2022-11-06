@@ -1,3 +1,4 @@
+import "../styles/Bills.css"
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState } from "react";
 import { preprocessData } from "../App";
@@ -5,8 +6,8 @@ import CardLayout from "../components/CardLayout"
 import { BillData } from "../types";
 import { IconContext } from "react-icons";
 import { MdOutlineReceiptLong } from "react-icons/md";
-import "../styles/Bills.css"
 import CloseWidget from "../components/CloseWidget";
+import { showMoney } from "../utils";
 
 interface Props {
     billsTimeline: BillData[];
@@ -23,23 +24,6 @@ function Bills({ billsTimeline, darkMode, editMode, closeSection }: Props) {
     const [amount, setAmount] = useState(0);
     const [dueDate, setDueDate] = useState("");
     const [addDroppeddown, setAddDroppeddown] = useState(false)
-
-    // billsTimeline = [
-    //     {
-    //         dueDate: new Date("2022-11-05T17:00:00"),
-    //         bills: [
-    //             { description: "Rent", paid: "200.00" }
-    //         ]
-    //     },
-    //     {
-    //         dueDate: new Date("2023-01-01T17:00:00"),
-    //         bills: [
-    //             { description: "Groceries", paid: "80.00" },
-    //             { description: "Netflix Subscription", paid: "10.00" },
-    //             { description: "Dinner", paid: "20.00" },
-    //         ]
-    //     }
-    // ]
 
     async function checkBill(description: string) {
         try {
@@ -145,7 +129,7 @@ function Bills({ billsTimeline, darkMode, editMode, closeSection }: Props) {
                                         <span style={{ textDecoration: bill.isPaid ? "line-through" : "none", marginLeft: "1em" }}>{bill.description}</span>
                                     </div>
                                     <div>
-                                        <span style={{ textDecoration: bill.isPaid ? "line-through" : "none", marginRight: "2em" }}>${bill.amountDue}</span>
+                                        <span style={{ textDecoration: bill.isPaid ? "line-through" : "none", marginRight: "2em" }}>{showMoney(bill.amountDue)}</span>
                                         <span className="remove-bill" onClick={() => removeBill(bill.description)}>
                                             ✖
                                         </span>
@@ -156,27 +140,28 @@ function Bills({ billsTimeline, darkMode, editMode, closeSection }: Props) {
                     </div>
                 ))}
             </div>
-            {addDroppeddown ? (
-                <div className="create-new-bill">
-                    <div className="create-bill-field">
-                        <label>Description</label>
-                        <input type={"text"} value={description} onChange={e => setDescription(e.target.value)} />
+            {
+                addDroppeddown ? (
+                    <div className="create-new-bill">
+                        <div className="create-bill-field">
+                            <label>Description</label>
+                            <input type={"text"} value={description} onChange={e => setDescription(e.target.value)} />
+                        </div>
+                        <div className="create-bill-field">
+                            <label>Amount</label>
+                            <input type={'number'} value={amount} onChange={e => setAmount(parseFloat(e.target.value))} />
+                        </div>
+                        <div className="create-bill-field">
+                            <label>Due Date</label>
+                            <input type={'text'} value={dueDate} onChange={e => setDueDate(e.target.value)} />
+                        </div>
+                        <button className="confirm-add-bill" onClick={() => addBill(description, amount, dueDate)}>Create</button>
+                        <button className="cancel-add-bill" onClick={() => setAddDroppeddown(false)}>Cancel</button>
                     </div>
-                    <div className="create-bill-field">
-                        <label>Amount</label>
-                        <input type={'number'} value={amount} onChange={e => setAmount(parseFloat(e.target.value))} />
-                    </div>
-                    <div className="create-bill-field">
-                        <label>Due Date</label>
-                        <input type={'text'} value={dueDate} onChange={e => setDueDate(e.target.value)} />
-                    </div>
-                    <button className="confirm-add-bill" onClick={() => addBill(description, amount, dueDate)}>Create</button>
-                    <button className="cancel-add-bill" onClick={() => setAddDroppeddown(false)}>Cancel</button>
-                </div>
-            ) :
-                <button className="confirm-add-bill" onClick={() => setAddDroppeddown(true)}>Add new bill</button>
+                ) :
+                    <button className="confirm-add-bill" onClick={() => setAddDroppeddown(true)}>Add new bill</button>
             }
-        </CardLayout>
+        </CardLayout >
     )
 }
 

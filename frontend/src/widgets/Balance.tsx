@@ -1,9 +1,9 @@
-import '../styles/CardLayout.css';
 import CardLayout from '../components/CardLayout';
 import { AccountData } from '../types';
 import { IconContext } from "react-icons";
 import { MdOutlineAccountBalanceWallet } from "react-icons/md";
 import CloseWidget from '../components/CloseWidget';
+import { showMoney } from "../utils";
 
 interface Props {
     accountData: AccountData[];
@@ -13,8 +13,6 @@ interface Props {
 }
 
 function Balance({ accountData, darkMode, editMode, closeSection }: Props) {
-    
-
     return (
         <div>
             <CardLayout width="40vw" darkMode={darkMode}>
@@ -37,7 +35,7 @@ function Balance({ accountData, darkMode, editMode, closeSection }: Props) {
                                 {bank.accounts !== null && bank.accounts.map(account => (
                                     <div className="col">
                                         <p>{account.accountType}</p>
-                                        <p>${account.balance}</p>
+                                        <p>{showMoney(account.balance)}</p>
                                     </div>
                                 ))}
                             </div>

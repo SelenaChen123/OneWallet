@@ -45,12 +45,22 @@ export interface CreditScoreData extends Omit<RawCreditScoreData, 'reportDate'> 
   reportDate: Date;
 }
 
+export interface FinancialAdvisorData {
+  bankName: string;
+  advisor: {
+    name: string;
+    phone: string;
+    email: string;
+  };
+}
+
 export interface RawAppData {
   name: string;
   accountData: AccountData[];
   billData: RawBillData[];
   transactionData: RawTransactionData[];
   creditScoreData: RawCreditScoreData[];
+  financialAdvisorData: FinancialAdvisorData[];
 }
 
 export interface AppData {
@@ -59,4 +69,5 @@ export interface AppData {
   billData: BillData[];
   transactionData: TransactionData[];
   creditScoreData: CreditScoreData[];
+  financialAdvisorData: FinancialAdvisorData[];
 }

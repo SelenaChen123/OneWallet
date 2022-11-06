@@ -38,7 +38,7 @@
 
 .padding {
     padding-top: 5%;
-    padding-bottom: 5%;
+    padding-bottom: 5%
 }
 /* 
 .content {
@@ -47,7 +47,6 @@
 
 .subheading {
     font-weight: 600;
-    margin-top: 5%;
     text-align: left;
     color: #8193e3;
 }
@@ -72,7 +71,6 @@
 }
 
 .row {
-    margin-top: 5%;
     display: flex;
 }
 
@@ -81,4 +79,19 @@
     margin-left: 5%;
     display: flex;
     justify-content: space-between;
+}
+
+.grid {
+    margin: 5%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.profile {
+    height: 150px;
+    width: 150px;
+    color: gray;
+    margin: 0;
+    padding: 0;
 }

@@ -3,6 +3,7 @@ import { TransactionData } from "../types";
 import { IconContext } from "react-icons";
 import { HiOutlineArrowsRightLeft } from "react-icons/hi2";
 import CloseWidget from "../components/CloseWidget";
+import { showMoney } from "../utils";
 
 interface Props {
     dailyTransactions: TransactionData[];
@@ -41,7 +42,7 @@ function Transactions({ dailyTransactions, darkMode, editMode, closeSection }: P
                                         </div>
                                     </div>
                                     <div>
-                                        {transaction.isWithdrawal ? <div className="green"><p>+ ${transaction.amount}</p></div> : <div className="red"><p>- ${transaction.amount}</p></div>}
+                                        {transaction.isWithdrawal ? <div className="green"><p>+{showMoney(transaction.amount)}</p></div> : <div className="red"><p>-{showMoney(transaction.amount)}</p></div>}
                                     </div>
                                 </div>
                             ))}
