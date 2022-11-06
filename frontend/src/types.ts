@@ -54,6 +54,18 @@ export interface FinancialAdvisorData {
   };
 }
 
+export interface RawPaymentData {
+  dueDate: string;
+  bills: {
+    amountDue: number;
+    description: string;
+  }[];
+}
+
+export interface PaymentData extends Omit<RawPaymentData, 'dueDate'> {
+  dueDate: Date
+}
+
 export interface RawAppData {
   name: string;
   accountData: AccountData[];
@@ -61,6 +73,7 @@ export interface RawAppData {
   transactionData: RawTransactionData[];
   creditScoreData: RawCreditScoreData[];
   financialAdvisorData: FinancialAdvisorData[];
+  paymentData: RawPaymentData[];
 }
 
 export interface AppData {
@@ -70,4 +83,5 @@ export interface AppData {
   transactionData: TransactionData[];
   creditScoreData: CreditScoreData[];
   financialAdvisorData: FinancialAdvisorData[];
+  paymentData: PaymentData[];
 }

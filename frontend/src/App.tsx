@@ -2,13 +2,14 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useEffect, useState } from 'react';
 import { AuthButton } from './AuthButton';
 import './styles/App.css';
-import { AppData, BillData, CreditScoreData, RawAppData, RawBillData, RawCreditScoreData, RawTransactionData, TransactionData } from './types';
+import { AppData, BillData, CreditScoreData, RawAppData, RawBillData, RawCreditScoreData, RawTransactionData, TransactionData, RawPaymentData, PaymentData } from './types';
 import SideBar from './SideBar';
 import Balance from './widgets/Balance';
 import Bills from './widgets/Bills';
 import Transactions from './widgets/Transactions';
 import CreditScores from './widgets/CreditScores';
 import FinancialAdvisors from './widgets/FinancialAdvisors';
+import ScheduledPayments from './widgets/ScheduledPayments';
 
 export function preprocessData(data: RawAppData): AppData {
   function processBill(billsData: RawBillData[]): BillData[] {
@@ -20,11 +21,15 @@ export function preprocessData(data: RawAppData): AppData {
   function processCreditScore(creditScoresData: RawCreditScoreData[]): CreditScoreData[] {
     return creditScoresData.map(creditScoreData => ({ ...creditScoreData, reportDate: new Date(creditScoreData.reportDate) }));
   }
+  function processPayment(paymentData: RawPaymentData[]): PaymentData[] {
+    return paymentData.map(paymentData => ({ ...paymentData, dueDate: new Date(paymentData.dueDate) }));
+  }
 
   const billData = processBill(data.billData);
   const transactionData = processTransaction(data.transactionData);
-  const creditScoreData = processCreditScore(data.creditScoreData)
-  return { ...data, billData, transactionData, creditScoreData };
+  const creditScoreData = processCreditScore(data.creditScoreData);
+  const paymentData = processPayment(data.paymentData);
+  return { ...data, billData, transactionData, creditScoreData, paymentData };
 }
 
 export type Section = "Balances" | "Transactions" | "Bills" | "Scheduled Payments" | "Credit Scores" | "Financial Advisors";
@@ -72,15 +77,6 @@ function App() {
     }
   }, [getAccessTokenSilently, isLoading, isAuthenticated])
 
-  useEffect(() => {
-    if (darkMode) {
-      document.body.style.background = "radial-gradient(#2A5470, #4C4177)"
-    } else {
-      document.body.style.background = "radial-gradient(#77EED8, #9EABE4)"
-    }
-  }, [darkMode])
-
-
   if (!isAuthenticated) {
     return <AuthButton isLogin={true} />
   }
@@ -89,9 +85,13 @@ function App() {
     return <div>Loading...</div>
   }
 
-  if (!isAuthenticated) {
-    return <AuthButton isLogin={true} />
-  }
+  useEffect(() => {
+    if (darkMode) {
+      document.body.style.background = "radial-gradient(#2A5470, #4C4177)"
+    } else {
+      document.body.style.background = "radial-gradient(#77EED8, #9EABE4)"
+    }
+  }, [darkMode])
 
   const accountData = [
     {
@@ -197,6 +197,22 @@ function App() {
         phone: "(139)-286-5817",
         email: "tyrone.wu@email.com"
       }
+    }
+  ]
+
+  const scheduledPayments = [
+    {
+      dueDate: new Date("2022-12-01T17:00:00"),
+      bills: [
+        { description: "Credit Card Autopay", amountDue: 326.00, isPaid: false }
+      ]
+    },
+    {
+      dueDate: new Date("2023-01-01T17:00:00"),
+      bills: [
+        { description: "Rent", amountDue: 20.00, isPaid: false },
+        { description: "Netflix Subscription", amountDue: 10.00, isPaid: false }
+      ]
     }
   ]
 

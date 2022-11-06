@@ -172,6 +172,16 @@ def get_info():
     for bn, n, p, e in res.fetchall():
         financial_advisor = { 'name': n, 'phone': p, 'email': e }
         financial_advisors_data.append({ 'bankName': bn, 'advisor': financial_advisor })
+        
+    res = cur.execute('SELECT amount_due, due_date, description FROM bills WHERE user_id = ?', (user_id,))
+    scheduled_payments_data = []
+    for ad, dd, d in res.fetchall():
+        payment = { 'amountDue': ad, 'description': d }
+        existing = next((x for x in scheduled_payments_data if x['dueDate'] == dd), None)
+        if existing is None:
+            scheduled_payments_data.append({ 'dueDate': dd, 'bills': [payment] })
+        else:
+            existing['payments'].append(payment)
 
     cur.close()
     return jsonify({ 'name': name, 'accountData': account_data, 'billData': bill_data, 'transactionData': transaction_data, 'creditScoreData': credit_score_data, 'financialAdvisorData': financial_advisors_data })

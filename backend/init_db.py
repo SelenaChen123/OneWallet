@@ -63,6 +63,16 @@ CREATE TABLE IF NOT EXISTS financial_advisors (
     FOREIGN KEY (user_id) REFERENCES users,
     PRIMARY KEY (user_id, name, phone, email)
 );
+
+CREATE TABLE IF NOT EXISTS scheduled_payments (
+    user_id TEXT,
+    amount_due INTEGER,
+    due_date TEXT,
+    description TEXT,
+
+    PRIMARY KEY (user_id, description),
+    FOREIGN KEY (user_id) REFERENCES users
+);
 ''')
 
 con.executemany('INSERT INTO users (user_id, name) VALUES (?, ?)', [
@@ -85,7 +95,6 @@ con.executemany('INSERT INTO bills (user_id, amount_due, due_date, description, 
     ('1', 12400, '2001-01-01', 'Mansion 4 Mortgage'),
     ('2', 100, '2003-01-01', '2012 Nissan Altima'),
     ('2', 50, '2004-01-01', 'Lamborghini Aventador'),
-    ('3', 100000, '2005-01-01', 'Electricity'),
 ])
 
 con.executemany('INSERT INTO transactions (account_number, bank_name, amount, date, description, withdrawal) VALUES (?, ?, ?, ?, ?, ?)', [
@@ -106,6 +115,15 @@ con.executemany('INSERT INTO financial_advisors (user_id, bank_name, name, phone
     ('1', 'Bank of Murica', 'Alex Snezhko', '(123)-456-7890', 'alex.snezhko@gmail.com'),
     ('1', 'Chased', 'Selena Chen', '(123)-456-7890', 'selena.chen@gmail.com'),
     ('1', 'The Bank', 'Tyrone Wu', '(123)-456-7890', 'tyrone.wu@gmail.com'),
+])
+
+con.executemany('INSERT INTO scheduled_payments (user_id, amount_due, due_date, description) VALUES (?, ?, ?, ?)', [
+    ('1', 330, '2001-02-03', 'Credit Card Autopay'),
+    ('1', 400, '2001-03-12', 'Rent'),
+    ('1', 2040, '2002-03-23', 'Only Fans Subscription'),
+    ('2', 100, '2002-01-01', 'Netflix Subscription'),
+    ('2', 50, '2002-01-01', 'Lamborghini Aventador'),
+    ('3', 100000, '2005-01-01', 'Electricity'),
 ])
 con.commit()
 con.close()
