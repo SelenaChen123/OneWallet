@@ -1,16 +1,22 @@
 import CardLayout from "../components/CardLayout";
-import { PaymentData } from "../types";
+import CloseWidget from "../components/CloseWidget";
+import { ScheduledPaymentData } from "../types";
 
 interface Props {
-    scheduledPayments: PaymentData[];
+    scheduledPayments: ScheduledPaymentData[];
+    darkMode: boolean;
+    editMode: boolean;
+    closeSection: () => void;
 }
 
-function ScheduledPayments({ scheduledPayments }: Props) {
+function ScheduledPayments({ scheduledPayments, darkMode, editMode, closeSection }: Props) {
     return (
-        <CardLayout width="40vw">
+        <CardLayout width="40vw" darkMode={darkMode}>
             <div className="heading">
                 {/* <IconContext.Provider value={{ className: "icon" }}><MdOutlineReceiptLong /></IconContext.Provider> */}
                 <h2>Scheduled Payments</h2>
+
+                {editMode && <CloseWidget closeSection={closeSection} />}
             </div>
             <div className="padding">
                 <hr />
@@ -28,7 +34,7 @@ function ScheduledPayments({ scheduledPayments }: Props) {
                                         <p>{bill.description}</p>
                                     </div>
                                     <div>
-                                    <p>${bill.amountDue}</p>
+                                        <p>${bill.amountDue}</p>
                                     </div>
                                 </div>
                             ))}

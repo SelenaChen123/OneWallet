@@ -2,7 +2,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useEffect, useState } from 'react';
 import { AuthButton } from './AuthButton';
 import './styles/App.css';
-import { AppData, BillData, CreditScoreData, RawAppData, RawBillData, RawCreditScoreData, RawTransactionData, TransactionData, RawPaymentData, PaymentData } from './types';
+import { AppData, BillData, CreditScoreData, RawAppData, RawBillData, RawCreditScoreData, RawTransactionData, TransactionData, RawScheduledPaymentData, ScheduledPaymentData } from './types';
 import SideBar from './SideBar';
 import Balance from './widgets/Balance';
 import Bills from './widgets/Bills';
@@ -21,15 +21,15 @@ export function preprocessData(data: RawAppData): AppData {
   function processCreditScore(creditScoresData: RawCreditScoreData[]): CreditScoreData[] {
     return creditScoresData.map(creditScoreData => ({ ...creditScoreData, reportDate: new Date(creditScoreData.reportDate) }));
   }
-  function processPayment(paymentData: RawPaymentData[]): PaymentData[] {
-    return paymentData.map(paymentData => ({ ...paymentData, dueDate: new Date(paymentData.dueDate) }));
+  function processPayment(scheduledPaymentData: RawScheduledPaymentData[]): ScheduledPaymentData[] {
+    return scheduledPaymentData.map(scheduledPaymentData => ({ ...scheduledPaymentData, dueDate: new Date(scheduledPaymentData.dueDate) }));
   }
 
   const billData = processBill(data.billData);
   const transactionData = processTransaction(data.transactionData);
   const creditScoreData = processCreditScore(data.creditScoreData);
-  const paymentData = processPayment(data.paymentData);
-  return { ...data, billData, transactionData, creditScoreData, paymentData };
+  const scheduledPaymentData = processPayment(data.scheduledPaymentData);
+  return { ...data, billData, transactionData, creditScoreData, scheduledPaymentData };
 }
 
 export type Section = "Balances" | "Transactions" | "Bills" | "Scheduled Payments" | "Credit Scores" | "Financial Advisors";
@@ -200,18 +200,18 @@ function App() {
     }
   ]
 
-  const scheduledPayments = [
+  const scheduledPaymentData = [
     {
       dueDate: new Date("2022-12-01T17:00:00"),
       bills: [
-        { description: "Credit Card Autopay", amountDue: 326.00, isPaid: false }
+        { description: "Credit Card Autopay", amountDue: 32600, isPaid: false }
       ]
     },
     {
       dueDate: new Date("2023-01-01T17:00:00"),
       bills: [
-        { description: "Rent", amountDue: 20.00, isPaid: false },
-        { description: "Netflix Subscription", amountDue: 10.00, isPaid: false }
+        { description: "Rent", amountDue: 2000, isPaid: false },
+        { description: "Netflix Subscription", amountDue: 1000, isPaid: false }
       ]
     }
   ]
@@ -225,6 +225,8 @@ function App() {
           <Balance darkMode={darkMode} accountData={data.accountData} editMode={editMode} closeSection={() => setActiveSections({ ...activeSections, "Balances": false })} />}
         {activeSections["Transactions"] &&
           <Transactions darkMode={darkMode} dailyTransactions={data.transactionData} editMode={editMode} closeSection={() => setActiveSections({ ...activeSections, "Transactions": false })} />}
+        {activeSections["Scheduled Payments"] &&
+          <ScheduledPayments darkMode={darkMode} scheduledPayments={data.scheduledPaymentData} editMode={editMode} closeSection={() => setActiveSections({ ...activeSections, "Scheduled Payments": false })} />}
         {activeSections["Bills"] &&
           <Bills darkMode={darkMode} billsTimeline={data.billData} editMode={editMode} closeSection={() => setActiveSections({ ...activeSections, "Bills": false })} />}
         {activeSections["Credit Scores"] &&
@@ -236,6 +238,8 @@ function App() {
           <Balance darkMode={darkMode} accountData={accountData} editMode={editMode} closeSection={() => setActiveSections({ ...activeSections, "Balances": false })} />}
         {activeSections["Transactions"] &&
           <Transactions darkMode={darkMode} dailyTransactions={transactionData} editMode={editMode} closeSection={() => setActiveSections({ ...activeSections, "Transactions": false })} />}
+        {activeSections["Scheduled Payments"] &&
+          <ScheduledPayments darkMode={darkMode} scheduledPayments={scheduledPaymentData} editMode={editMode} closeSection={() => setActiveSections({ ...activeSections, "Scheduled Payments": false })} />}
         {activeSections["Bills"] &&
           <Bills darkMode={darkMode} billsTimeline={billData} editMode={editMode} closeSection={() => setActiveSections({ ...activeSections, "Bills": false })} />}
         {activeSections["Credit Scores"] &&
