@@ -1,16 +1,15 @@
-import { LoginButton } from "./LoginButton";
-import LogoutButton from "./LogoutButton";
+import { AuthButton } from "./AuthButton";
+import "./styles/Header.css"
 
 interface Props {
   isAuthenticated: boolean;
 }
 
 export default function Header({ isAuthenticated }: Props) {
-  if (isAuthenticated) {
-    return <>
-      <LogoutButton />
-    </>
-  }
-
-  return <LoginButton />
+  return (
+    <header>
+      <h1>OneWallet</h1>
+      <AuthButton isLogin={!isAuthenticated} />
+    </header>
+  );
 }

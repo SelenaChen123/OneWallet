@@ -119,6 +119,7 @@ def get_db():
 def close_connection(exception):
     db = getattr(g, '_database', None)
     if db is not None:
+        db.commit()
         db.close()
 
 @app.route('/api/info')
@@ -169,17 +170,18 @@ def get_info():
     cur.close()
     return jsonify({ 'name': name, 'accountData': account_data, 'billData': bill_data, 'transactionData': transaction_data, 'creditScoreData': credit_score_data })
 
-@app.route('/api/add-bill/<user_id>', methods=['POST'])
+@app.route('/api/add-bill', methods=['POST'])
 @cross_origin(headers=["Content-Type", "Authorization"])
 @requires_auth
 def add_bill():
     user_id = get_user_id()
     description = request.json['description']
-    amount_due = request.json['amount_due']
-    due_date = request.json['due_date']
+    amount_due = request.json['amountDue']
+    due_date = request.json['dueDate']
     cur = get_db().cursor()
     cur.execute('INSERT INTO bills (user_id, amount_due, due_date, description, paid) VALUES (?, ?, ?, ?, FALSE)', (user_id, amount_due, due_date, description))
     cur.close()
+    return jsonify({ 'success': True })
 
 @app.route('/api/remove-bill', methods=['POST'])
 @cross_origin(headers=["Content-Type", "Authorization"])
@@ -190,6 +192,7 @@ def remove_bill():
     cur = get_db().cursor()
     cur.execute('DELETE FROM bills WHERE user_id = ? AND description = ?', (user_id, description))
     cur.close()
+    return jsonify({ 'success': True })
 
 @app.route('/api/check-bill', methods=['POST'])
 @cross_origin(headers=["Content-Type", "Authorization"])
@@ -200,6 +203,7 @@ def check_bill():
     cur = get_db().cursor()
     cur.execute('UPDATE bills SET paid = (paid + 1) % 2 WHERE user_id = ? AND description = ?', (user_id, description))
     cur.close()
+    return jsonify({ 'success': True })
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)

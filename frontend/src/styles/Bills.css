@@ -1,0 +1,39 @@
+.remove-bill {
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 1.25em;
+  text-decoration: none;
+}
+
+.remove-bill:hover {
+  color: rgb(180, 46, 46);
+}
+
+.create-bill-field {
+  margin-bottom: 10px;
+}
+
+.create-bill-field label {
+  margin-right: 10px;
+  display: inline-block;
+  width: 6em;
+}
+
+.confirm-add-bill {
+  background-color: rgb(85, 221, 153);
+  margin-top: 10px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1em;
+  padding: 4px 10px;
+}
+
+.cancel-add-bill {
+  background-color: rgb(238, 101, 101);
+  margin-top: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1em;
+  padding: 4px 10px;
+}

@@ -1,15 +1,123 @@
+import { useAuth0 } from "@auth0/auth0-react";
+import { useState } from "react";
+import { preprocessData } from "../App";
 import CardLayout from "../components/CardLayout"
 import { BillData } from "../types";
 import { IconContext } from "react-icons";
 import { MdOutlineReceiptLong } from "react-icons/md";
+import "../styles/Bills.css"
 
 interface Props {
     billsTimeline: BillData[];
 }
 
 function Bills({ billsTimeline }: Props) {
+    const [data, setData] = useState(billsTimeline);
+    const { getAccessTokenSilently } = useAuth0();
+
+    const [description, setDescription] = useState("");
+    const [amount, setAmount] = useState(0);
+    const [dueDate, setDueDate] = useState("");
+    const [addDroppeddown, setAddDroppeddown] = useState(false)
+
+    // billsTimeline = [
+    //     {
+    //         dueDate: new Date("2022-11-05T17:00:00"),
+    //         bills: [
+    //             { description: "Rent", paid: "200.00" }
+    //         ]
+    //     },
+    //     {
+    //         dueDate: new Date("2023-01-01T17:00:00"),
+    //         bills: [
+    //             { description: "Groceries", paid: "80.00" },
+    //             { description: "Netflix Subscription", paid: "10.00" },
+    //             { description: "Dinner", paid: "20.00" },
+    //         ]
+    //     }
+    // ]
+
+    async function checkBill(description: string) {
+        try {
+            const accessToken = await getAccessTokenSilently({
+                audience: `https://hacknc2022ast-api`,
+                scope: "read:bankinfo",
+            });
+
+            await fetch("http://localhost:5000/api/check-bill", {
+                method: "POST",
+                body: JSON.stringify({ description }),
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${accessToken}`,
+                }
+            });
+            const newData = [...data];
+            const billGroup = newData.find(x => x.bills.some(y => y.description === description))!;
+            const bill = billGroup.bills.find(x => x.description === description)!;
+            bill.isPaid = !bill.isPaid;
+            setData(newData);
+        } catch (e) {
+            console.log((e as any).message);
+        }
+    }
+
+    async function removeBill(description: string) {
+        try {
+            const accessToken = await getAccessTokenSilently({
+                audience: `https://hacknc2022ast-api`,
+                scope: "read:bankinfo",
+            });
+
+            await fetch("http://localhost:5000/api/remove-bill", {
+                method: "POST",
+                body: JSON.stringify({ description }),
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${accessToken}`,
+                }
+            });
+            const newData = [...data];
+            const billGroup = newData.find(x => x.bills.some(y => y.description === description))!;
+            const keptBills = billGroup.bills.filter(x => x.description !== description)!;
+            billGroup.bills = keptBills
+            setData(newData);
+        } catch (e) {
+            console.log((e as any).message);
+        }
+    }
+
+    async function addBill(description: string, amountDue: number, dueDate: string) {
+        try {
+            const accessToken = await getAccessTokenSilently({
+                audience: `https://hacknc2022ast-api`,
+                scope: "read:bankinfo",
+            });
+
+            await fetch("http://localhost:5000/api/add-bill", {
+                method: "POST",
+                body: JSON.stringify({ description, amountDue, dueDate }),
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${accessToken}`,
+                }
+            });
+            const response = await fetch(`http://localhost:5000/api/info`, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            });
+
+            const newData = await response.json();
+            setData(preprocessData(newData).billData);
+            setAddDroppeddown(false)
+        } catch (e) {
+            console.log((e as any).message);
+        }
+    }
+
     return (
-        <CardLayout width="25vw">
+        <CardLayout width="40vw">
             <div className="heading">
                 <IconContext.Provider value={{ className: "icon" }}><MdOutlineReceiptLong /></IconContext.Provider>
                 <h2>Bills</h2>
@@ -18,19 +126,23 @@ function Bills({ billsTimeline }: Props) {
                 <hr />
             </div>
             <div className="content">
-                {billsTimeline !== null && billsTimeline.map(scheduledBills => (
+                {data.map(scheduledBills => (
                     <div className="row">
                         <div className="subsubheading">
                             <p>{scheduledBills.dueDate.toLocaleDateString()}</p>
                         </div>
                         <div style={{ flexGrow: '99' }}>
-                            {scheduledBills.bills !== null && scheduledBills.bills.map(bill => (
-                                <div className="col">
+                            {scheduledBills.bills.map(bill => (
+                                <div className="col" style={{ color: bill.isPaid ? "gray" : "inherit" }}>
                                     <div>
-                                        <p>{bill.description}</p>
+                                        <input type={'checkbox'} checked={bill.isPaid} onChange={() => checkBill(bill.description)} />
+                                        <span style={{ textDecoration: bill.isPaid ? "line-through" : "none", marginLeft: "1em" }}>{bill.description}</span>
                                     </div>
                                     <div>
-                                        <p>${bill.amountDue}</p>
+                                        <span style={{ textDecoration: bill.isPaid ? "line-through" : "none", marginRight: "2em" }}>${bill.amountDue}</span>
+                                        <span className="remove-bill" onClick={() => removeBill(bill.description)}>
+                                            ✖
+                                        </span>
                                     </div>
                                 </div>
                             ))}
@@ -38,6 +150,26 @@ function Bills({ billsTimeline }: Props) {
                     </div>
                 ))}
             </div>
+            {addDroppeddown ? (
+                <div className="create-new-bill">
+                    <div className="create-bill-field">
+                        <label>Description</label>
+                        <input type={"text"} value={description} onChange={e => setDescription(e.target.value)} />
+                    </div>
+                    <div className="create-bill-field">
+                        <label>Amount</label>
+                        <input type={'number'} value={amount} onChange={e => setAmount(parseFloat(e.target.value))} />
+                    </div>
+                    <div className="create-bill-field">
+                        <label>Due Date</label>
+                        <input type={'text'} value={dueDate} onChange={e => setDueDate(e.target.value)} />
+                    </div>
+                    <button className="confirm-add-bill" onClick={() => addBill(description, amount, dueDate)}>Create</button>
+                    <button className="cancel-add-bill" onClick={() => setAddDroppeddown(false)}>Cancel</button>
+                </div>
+            ) :
+                <button className="confirm-add-bill" onClick={() => setAddDroppeddown(true)}>Add new bill</button>
+            }
         </CardLayout>
     )
 }

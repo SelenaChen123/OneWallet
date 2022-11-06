@@ -13,7 +13,7 @@ function Balance({ accountData }: Props) {
 
     return (
         <div>
-            <CardLayout width="25vw">
+            <CardLayout width="40vw">
                 <div className="heading">
                     <IconContext.Provider value={{ className: "icon" }}><MdOutlineAccountBalanceWallet /></IconContext.Provider>
                     <h2>Balances</h2>

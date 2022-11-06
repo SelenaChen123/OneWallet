@@ -9,7 +9,7 @@ interface Props {
 
 function Transactions({ dailyTransactions }: Props) {
     return (
-        <CardLayout width="25vw">
+        <CardLayout width="40vw">
             <div className="heading">
                 <IconContext.Provider value={{ className: "icon" }}><HiOutlineArrowsRightLeft /></IconContext.Provider>
                 <h2>Transactions</h2>

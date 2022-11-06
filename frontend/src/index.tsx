@@ -29,6 +29,6 @@ root.render(
       scope="read:bankinfo"
     >
       <RouterProvider router={router} />
-    </Auth0Provider>,
+    </Auth0Provider>
   </React.StrictMode>
 );

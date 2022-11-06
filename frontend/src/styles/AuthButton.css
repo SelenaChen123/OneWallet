@@ -1,0 +1,12 @@
+.auth-button {
+  font-size: 1em;
+  border: none;
+  font-weight: bold;
+  background-color: inherit;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.auth-button:hover {
+  color: #417179;
+}
