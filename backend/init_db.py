@@ -52,6 +52,17 @@ CREATE TABLE IF NOT EXISTS credit_scores (
 
     PRIMARY KEY (user_id, report_date, reporting_agency)
 );
+
+CREATE TABLE IF NOT EXISTS financial_advisors (
+    user_id TEXT,
+    bank_name TEXT,
+    name TEXT,
+    phone TEXT,
+    email TEXT,
+
+    FOREIGN KEY (user_id) REFERENCES users,
+    PRIMARY KEY (user_id, name, phone, email)
+);
 ''')
 
 con.executemany('INSERT INTO users (user_id, name) VALUES (?, ?)', [
@@ -86,9 +97,15 @@ con.executemany('INSERT INTO transactions (account_number, bank_name, amount, da
 ])
 
 con.executemany('INSERT INTO credit_scores (user_id, report_date, credit_score) VALUES (?, ?, ?)', [
-    ('1', '2000-01-01 12:30:00.000', 100),
-    ('1', '2001-01-01 12:30:00.000', 200),
+    ('1', '2000-01-01 12:30:00.000', 400),
+    ('1', '2001-01-01 12:30:00.000', 600),
     ('1', '2002-01-01 12:30:00.000', 800),
+])
+
+con.executemany('INSERT INTO financial_advisors (user_id, bank_name, name, phone, email) VALUES (?, ?, ?, ?, ?)', [
+    ('1', 'Bank of Murica', 'Alex Snezhko', '(123)-456-7890', 'alex.snezhko@gmail.com'),
+    ('1', 'Chased', 'Selena Chen', '(123)-456-7890', 'selena.chen@gmail.com'),
+    ('1', 'The Bank', 'Tyrone Wu', '(123)-456-7890', 'tyrone.wu@gmail.com'),
 ])
 con.commit()
 con.close()

@@ -27,13 +27,22 @@ export function preprocessData(data: RawAppData): AppData {
   return { ...data, billData, transactionData, creditScoreData };
 }
 
+export type Section = "Balances" | "Transactions" | "Bills" | "Scheduled Payments" | "Credit Scores" | "Financial Advisors";
 export const allSections = ["Balances", "Transactions", "Bills", "Scheduled Payments", "Credit Scores", "Financial Advisors"];
+const allActive: Record<Section, boolean> = {
+  "Balances": true,
+  "Transactions": true,
+  "Bills": true,
+  "Scheduled Payments": true,
+  "Credit Scores": true,
+  "Financial Advisors": true,
+}
 
 function App() {
   const { isAuthenticated, isLoading, getAccessTokenSilently, loginWithRedirect } = useAuth0();
   const [data, setData] = useState<AppData | null>(null)
   const [darkMode, setDarkMode] = useState(false);
-  const [activeSections, setActiveSections] = useState(allSections);
+  const [activeSections, setActiveSections] = useState(allActive);
   const [editMode, setEditMode] = useState(false)
 
   useEffect(() => {
@@ -63,14 +72,6 @@ function App() {
     }
   }, [getAccessTokenSilently, isLoading, isAuthenticated])
 
-  if (!isAuthenticated) {
-    return <AuthButton isLogin={true} />
-  }
-
-  if (isLoading || data === null) {
-    return <div>Loading...</div>
-  }
-
   useEffect(() => {
     if (darkMode) {
       document.body.style.background = "radial-gradient(#2A5470, #4C4177)"
@@ -78,6 +79,15 @@ function App() {
       document.body.style.background = "radial-gradient(#77EED8, #9EABE4)"
     }
   }, [darkMode])
+
+
+  if (!isAuthenticated) {
+    return <AuthButton isLogin={true} />
+  }
+
+  if (isLoading || data === null) {
+    return <div>Loading...</div>
+  }
 
   if (!isAuthenticated) {
     return <AuthButton isLogin={true} />
@@ -194,22 +204,16 @@ function App() {
     <>
       <SideBar setDarkMode={setDarkMode} darkMode={darkMode} isAuthenticated={isAuthenticated} activeSections={activeSections} setActiveSections={setActiveSections} editMode={editMode} setEditMode={setEditMode} />
       <div className="main">
-        {activeSections.includes("Balances") &&
-          <Balance darkMode={darkMode} accountData={data.accountData} editMode={editMode} closeSection={() => setActiveSections(activeSections.filter(x => x !== "Balances"))} />}
-        {activeSections.includes("Bills") &&
-          <Bills darkMode={darkMode} billsTimeline={data.billData} editMode={editMode} closeSection={() => setActiveSections(activeSections.filter(x => x !== "Bills"))} />}
-        {activeSections.includes("Transactions") &&
-          <Transactions darkMode={darkMode} dailyTransactions={data.transactionData} editMode={editMode} closeSection={() => setActiveSections(activeSections.filter(x => x !== "Transactions"))} />}
-        {activeSections.includes("Credit Scores") &&
-          <CreditScores darkMode={darkMode} creditScores={data.creditScoreData} editMode={editMode} closeSection={() => setActiveSections(activeSections.filter(x => x !== "Credit Scores"))} />}
-        {activeSections.includes("Financial Advisors") &&
-          <FinancialAdvisors darkMode={darkMode} financialAdvisors={data.financialAdvisorData} editMode={editMode} closeSection={() => setActiveSections(activeSections.filter(x => x !== "Financial Advisors"))} />}
-
-        {/* <div><Balance darkMode={darkMode} accountData={accountData} editMode={editMode} closeSection={() => setActiveSections(activeSections.filter(x => x !== "Balances"))} /></div>
-        <div><Bills darkMode={darkMode} billsTimeline={billsTimeline} editMode={editMode} closeSection={() => setActiveSections(activeSections.filter(x => x !== "Bills"))} /></div>
-        <div><Transactions darkMode={darkMode} dailyTransactions={dailyTransactions} editMode={editMode} closeSection={() => setActiveSections(activeSections.filter(x => x !== "Transactions"))} /></div>
-        <div><CreditScores darkMode={darkMode} creditScores={creditScores} editMode={editMode} closeSection={() => setActiveSections(activeSections.filter(x => x !== "Credit Scores"))} /></div>
-        <div><FinancialAdvisors darkMode={darkMode} financialAdvisors={financialAdvisors} editMode={editMode} closeSection={() => setActiveSections(activeSections.filter(x => x !== "Financial Advisors"))} /></div> */}
+        {activeSections["Balances"] &&
+          <Balance darkMode={darkMode} accountData={data.accountData} editMode={editMode} closeSection={() => setActiveSections({...activeSections, "Balances": false })} />}
+        {activeSections["Transactions"] &&
+          <Transactions darkMode={darkMode} dailyTransactions={data.transactionData} editMode={editMode} closeSection={() => setActiveSections({...activeSections, "Transactions": false})} />}
+        {activeSections["Bills"] &&
+          <Bills darkMode={darkMode} billsTimeline={data.billData} editMode={editMode} closeSection={() => setActiveSections({...activeSections, "Bills": false})} />}
+        {activeSections["Credit Scores"] &&
+          <CreditScores darkMode={darkMode} creditScores={data.creditScoreData} editMode={editMode} closeSection={() => setActiveSections({...activeSections, "Credit Scores": false })} />}
+        {activeSections["Financial Advisors"] &&
+          <FinancialAdvisors darkMode={darkMode} financialAdvisors={data.financialAdvisorData} editMode={editMode} closeSection={() => setActiveSections({...activeSections, "Financial Advisors": false })} />}
       </div>
     </>
   );

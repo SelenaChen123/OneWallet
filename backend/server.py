@@ -167,8 +167,14 @@ def get_info():
     res = cur.execute('SELECT report_date, credit_score, reporting_agency FROM credit_scores WHERE user_id = ?', (user_id,))
     credit_score_data = [{ 'reportDate': rd, 'creditScore': cs, 'reportingAgency': ra } for rd, cs, ra in res.fetchall()]
 
+    res = cur.execute('SELECT bank_name, name, phone, email FROM financial_advisors WHERE user_id = ?', (user_id,))
+    financial_advisors_data = []
+    for bn, n, p, e in res.fetchall():
+        financial_advisor = { 'name': n, 'phone': p, 'email': e }
+        financial_advisors_data.append({ 'bankName': bn, 'advisor': financial_advisor })
+
     cur.close()
-    return jsonify({ 'name': name, 'accountData': account_data, 'billData': bill_data, 'transactionData': transaction_data, 'creditScoreData': credit_score_data })
+    return jsonify({ 'name': name, 'accountData': account_data, 'billData': bill_data, 'transactionData': transaction_data, 'creditScoreData': credit_score_data, 'financialAdvisorData': financial_advisors_data })
 
 @app.route('/api/add-bill', methods=['POST'])
 @cross_origin(headers=["Content-Type", "Authorization"])
