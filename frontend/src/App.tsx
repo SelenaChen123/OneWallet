@@ -131,6 +131,19 @@ function App() {
   //   }
   // ]
 
+  // const creditScores = [
+  //   {
+  //     reportDate: new Date("2022-11-05T17:00:00"),
+  //     creditScore: 850,
+  //     reportingAgency: "FICO"
+  //   },
+  //   {
+  //     reportDate: new Date("2022-12-06T17:00:00"),
+  //     creditScore: 350,
+  //     reportingAgency: "VantageScore"
+  //   },
+  // ]
+
   return (
     <>
       <div className="bar">
