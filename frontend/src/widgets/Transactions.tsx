@@ -1,6 +1,7 @@
-import { useState } from "react";
 import CardLayout from "../components/CardLayout"
 import { TransactionData } from "../types";
+import { IconContext } from "react-icons";
+import { HiOutlineArrowsRightLeft } from "react-icons/hi2";
 
 interface Props {
     dailyTransactions: TransactionData[];
@@ -41,10 +42,11 @@ function Transactions({ dailyTransactions }: Props) {
     return (
         <CardLayout width="25vw">
             <div className="heading">
+                <IconContext.Provider value={{ className: "icon" }}><HiOutlineArrowsRightLeft /></IconContext.Provider>
                 <h2>Transactions</h2>
-                <div className="padding">
-                    <hr />
-                </div>
+            </div>
+            <div className="padding">
+                <hr />
             </div>
             <div className="content">
                 {dailyTransactions !== null && dailyTransactions.map(dailyTransaction => (

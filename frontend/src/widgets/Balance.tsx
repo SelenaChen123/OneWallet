@@ -1,6 +1,8 @@
 import '../styles/CardLayout.css';
 import CardLayout from '../components/CardLayout';
 import { AccountData } from '../types';
+import { IconContext } from "react-icons";
+import { MdOutlineAccountBalanceWallet } from "react-icons/md";
 
 interface Props {
     accountData: AccountData[];
@@ -27,10 +29,11 @@ function Balance({ accountData }: Props) {
         <div>
             <CardLayout width="25vw">
                 <div className="heading">
+                    <IconContext.Provider value={{ className: "icon" }}><MdOutlineAccountBalanceWallet /></IconContext.Provider>
                     <h2>Balances</h2>
-                    <div className="padding">
-                        <hr />
-                    </div>
+                </div>
+                <div className="padding">
+                    <hr />
                 </div>
                 <div className="content">
                     {accountData.map(bank => (

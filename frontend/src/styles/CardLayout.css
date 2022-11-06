@@ -30,13 +30,21 @@ body {
     text-align: left;
     font-weight: 600;
     color: #4eca9f;
-    /* text-decoration: underline; */
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    height: 35px;
+    width: 35px;
+    margin-right: 10px;
+    margin-bottom: 0px;
+    color: #4eca9f;
 }
 
 .padding {
     padding-top: 5%;
     padding-bottom: 5%;
-    color: #4eca9f;
 }
 
 .content {
