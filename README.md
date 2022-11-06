@@ -25,7 +25,9 @@ $ pip install -r requirements.txt
 python init_db.py
 
 # Run flask application
-$ export FLASK_APP=server FLASK_ENV=development flask run
+> $env:FLASK_APP='server'; $env:FLASK_ENV='development'; python -m flask run
+# or 
+$ export FLASK_APP=server FLASK_ENV=development python -m flask run
  * Serving Flask app "app" (lazy loading)
  * Environment: development
  * Debug mode: on
