@@ -4,17 +4,15 @@
 
 -----
 
-
-
 ![WebApp-lightmode](https://github.com/SelenaChen123/HackNC2022/blob/main/docs/webpage-lightmode.png)
 
-![WebApp-lightmode](https://github.com/SelenaChen123/HackNC2022/blob/main/docs/webpage-darkmode.png)
+![WebApp-darkmode](https://github.com/SelenaChen123/HackNC2022/blob/main/docs/webpage-darkmode.png)
 
 <br />
 
 -----
 
-## How to Run 👷🏻
+## 💻 How to Run 
 
 ### Backend
 
@@ -32,7 +30,7 @@ $ cd backend
 $ pip install -r requirements.txt
 
 # Initialize the schema and populate database
-python init_db.py
+$ python init_db.py
 
 # Run flask application
 > $env:FLASK_APP='server'; $env:FLASK_ENV='development'; python -m flask run
