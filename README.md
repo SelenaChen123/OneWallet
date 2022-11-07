@@ -1,8 +1,18 @@
-# 👛 OneWallet
+<p align="center">
+<img width="350" src="https://github.com/SelenaChen123/HackNC2022/blob/main/docs/project-header.svg">
+</p>
+
+-----
+
+
 
 ![WebApp-lightmode](https://github.com/SelenaChen123/HackNC2022/blob/main/docs/webpage-lightmode.png)
 
 ![WebApp-lightmode](https://github.com/SelenaChen123/HackNC2022/blob/main/docs/webpage-darkmode.png)
+
+<br />
+
+-----
 
 ## How to Run 👷🏻
 
