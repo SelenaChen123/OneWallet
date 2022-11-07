@@ -16,17 +16,17 @@
 
 ### Backend
 
-Ensure you have `python` version `3.6` or greater installed on your system. For our application, our current `python` version is `3.10`.  
+Ensure you have `python` version `3.7` or greater installed on your system. 
 
 ```python
-# Ensure you have python 3
+# Ensure you have python 3.7 or greater
 $ python --version
 Python 3.10.1
 
 # Navigate to backend directory
 $ cd backend
 
-# Install necessary python packages
+# Install python packages
 $ pip install -r requirements.txt
 
 # Initialize the schema and populate database
@@ -47,17 +47,17 @@ $ export FLASK_APP=server FLASK_ENV=development python -m flask run
 
 ### Frontend
 
-Ensure you have `npm` version `8.3` or greater installed on your system. For our application, our current `npm` version is `8.3`.  
+Ensure you have `npm` version `8.3` or greater installed on your system. 
 
 ```bash
-# Ensure you have npm
+# Ensure you have npm 8.3 or greater
 $ npm -v
 8.3.0
 
 # Navigate to frontend directory
 $ cd frontend
 
-# Install necessary npm packages
+# Install npm packages
 $ npm i
 
 # Run the frontend application
@@ -67,3 +67,5 @@ Starting the development server...
 webpack compiled with 1 warning
 No issues found.
 ```
+
+The web application can now be reached through `localhost:3000`. 
